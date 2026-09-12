@@ -1,0 +1,18 @@
+npm install @prisma/client
+npm install -D prisma
+npx prisma init
+
+npm install express dotenv
+npm install -D nodemon
+
+npm init -y
+
+# Cria/atualiza o banco de dados e gera o cliente do Prisma
+npx prisma migrate dev --name init
+
+# Abre a interface visual no navegador para ver e editar os dados do banco
+npx prisma studio
+
+npm install -D @types/node
+
+npm install dotenv
