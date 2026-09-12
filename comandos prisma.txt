@@ -16,3 +16,5 @@ npx prisma studio
 npm install -D @types/node
 
 npm install dotenv
+
+npx prisma migrate dev --name init
