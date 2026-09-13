@@ -1,20 +1,20 @@
-npm install @prisma/client
-npm install -D prisma
-npx prisma init
-
-npm install express dotenv
-npm install -D nodemon
-
+# 1. Cria o arquivo package.json inicial
 npm init -y
 
-# Cria/atualiza o banco de dados e gera o cliente do Prisma
-npx prisma migrate dev --name init
+# 2. Instala as dependências principais da aplicação
+npm install express @prisma/client dotenv
 
-# Abre a interface visual no navegador para ver e editar os dados do banco
+# 3. Instala as ferramentas de desenvolvimento (Prisma CLI e Nodemon para rodar o servidor)
+npm install -D prisma nodemon
+
+# 4. Inicializa a estrutura do Prisma (cria a pasta /prisma com o schema.prisma e o arquivo .env)
+npx prisma init
+
+#5. No .env
+DATABASE_URL="postgresql://postgres:SUA_SENHA@localhost:5432/trabalho_web?schema=public"
+
+# Executa a migração: cria o banco de dados, gera as tabelas no PostgreSQL e constrói o Prisma Client
+npx prisma migrate dev --name cria_alunos_e_professores
+
+# Abre o painel visual do Prisma Studio no navegador (http://localhost:5555)
 npx prisma studio
-
-npm install -D @types/node
-
-npm install dotenv
-
-npx prisma migrate dev --name init
