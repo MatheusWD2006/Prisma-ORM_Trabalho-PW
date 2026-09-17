@@ -51,7 +51,7 @@ Somente para um projeto novo:
 ```powershell
 npm init -y
 npm install express cors dotenv @prisma/client @prisma/adapter-pg pg
-npm install --save-dev prisma nodemon tsx
+npm install --save-dev prisma nodemon tsx @types/node
 ```
 
 O que cada pacote faz:
@@ -67,8 +67,43 @@ O que cada pacote faz:
 | `pg` | Driver de conexão com PostgreSQL |
 | `tsx` | Executa o cliente Prisma gerado em TypeScript |
 | `nodemon` | Reinicia o servidor ao detectar alterações |
+| `@types/node` | Fornece as tipagens do Node para o TypeScript reconhecer `process.env` |
 
-## 4. Inicializar o Prisma
+## 4. Corrigir o erro do TypeScript/Node
+
+Se o VS Code mostrar erro como:
+
+```text
+Cannot find name 'process'. Do you need to install type definitions for node?
+```
+
+É necessário instalar as tipagens do Node e configurar o TypeScript:
+
+```powershell
+npm i -D @types/node
+```
+
+Arquivo: `server/tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
+  },
+  "include": ["**/*.ts", "**/*.js"]
+}
+```
+
+Isso resolveu o erro em `prisma.config.ts` e em outros arquivos que usam `process.env`.
+
+## 5. Inicializar o Prisma
 
 Em um projeto novo:
 
@@ -79,19 +114,19 @@ npx prisma init
 Esse comando cria, entre outros arquivos, `prisma/schema.prisma` e `.env`.
 Neste projeto já existe também o arquivo `prisma.config.ts`.
 
-## 5. Configurar o arquivo `.env`
+## 6. Configurar o arquivo `.env`
 
 Arquivo: `server/.env`
 
 ```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/trabalho_web?schema=public"
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/trabalho_web?schema=public"
 PORT=3003
 ```
 
 Trocar `postgres:postgres` pelo usuário e senha reais do PostgreSQL quando
 necessário. Não publicar esse arquivo com credenciais reais.
 
-## 6. Configurar o Prisma
+## 7. Configurar o Prisma
 
 Arquivo: `server/prisma.config.ts`
 
@@ -110,7 +145,7 @@ export default defineConfig({
 });
 ```
 
-## 7. Configurar o schema
+## 8. Configurar o schema
 
 Arquivo: `server/prisma/schema.prisma`
 
@@ -150,7 +185,7 @@ model Aluno {
 O `generator` faz o cliente ser criado em `server/generated/prisma`. Essa
 pasta é automática e não deve ser editada manualmente.
 
-## 8. Criar as tabelas e gerar o cliente
+## 9. Criar as tabelas e gerar o cliente
 
 Executar depois de configurar o PostgreSQL e o `.env`:
 
@@ -174,7 +209,7 @@ npx prisma migrate status
 Não apagar a pasta `prisma/migrations` sem saber que o histórico do banco será
 reiniciado.
 
-## 9. Configurar o `package.json`
+## 10. Configurar o `package.json`
 
 Arquivo: `server/package.json`. Os scripts essenciais são:
 
@@ -192,7 +227,7 @@ O `tsx` é necessário porque o cliente gerado pelo Prisma 7 contém arquivos
 `.ts`. Executar apenas `nodemon server.js` causa o erro
 `ERR_UNKNOWN_FILE_EXTENSION: .ts`.
 
-## 10. Criar o servidor
+## 11. Criar o servidor
 
 Arquivo: `server/server.js`
 
@@ -260,7 +295,7 @@ const prisma = new PrismaClient();
 Sem o adapter PostgreSQL, o Prisma 7 informa que o cliente foi criado sem as
 opções necessárias.
 
-## 11. Iniciar o servidor
+## 12. Iniciar o servidor
 
 Modo desenvolvimento, com reinício automático:
 
@@ -282,7 +317,7 @@ Servidor rodando na porta 3003
 
 Manter esse terminal aberto enquanto os testes são executados.
 
-## 12. Testar a rota principal
+## 13. Testar a rota principal
 
 No PowerShell, abrir outro terminal e executar:
 
@@ -302,7 +337,7 @@ Também é possível abrir no navegador:
 http://localhost:3003/
 ```
 
-## 13. Testar a consulta de alunos
+## 14. Testar a consulta de alunos
 
 ```powershell
 Invoke-WebRequest -UseBasicParsing http://localhost:3003/alunos
@@ -329,7 +364,7 @@ Também é possível consultar pelo `psql`:
 SELECT * FROM "Aluno";
 ```
 
-## 14. Diagnóstico de erros comuns
+## 15. Diagnóstico de erros comuns
 
 ### `ENOENT package.json`
 
@@ -339,6 +374,27 @@ O comando foi executado na pasta errada. Entrar em `server` antes de usar npm.
 
 O servidor foi iniciado com `node server.js` ou com `nodemon server.js` sem o
 `tsx`. Usar:
+
+### `Cannot find name 'process'`
+
+O erro do editor aconteceu porque o TypeScript não tinha as tipagens do Node.
+Instalar:
+
+```powershell
+npm i -D @types/node
+```
+
+e garantir que exista `tsconfig.json` com:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}
+```
+
+Depois disso, o arquivo `prisma.config.ts` volta a ficar sem erro.
 
 ```powershell
 npm run start:dev
@@ -371,7 +427,7 @@ npx prisma validate
 
 As tabelas precisam existir no banco antes da consulta.
 
-## 15. Ordem resumida para executar novamente
+## 16. Ordem resumida para executar novamente
 
 ```powershell
 cd "c:\Users\User\OneDrive\Documentos\FACULDADE - CIÊNCIAS DA COMPUTAÇÃO\5° QUINTO SEMESTRE CC\Programação WEB\Trabalho Prisma_ORM\server"
