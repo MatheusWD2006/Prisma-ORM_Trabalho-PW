@@ -1,0 +1,5385 @@
+
+/**
+ * Client
+**/
+
+import * as runtime from './runtime/library.js';
+import $Types = runtime.Types // general types
+import $Public = runtime.Types.Public
+import $Utils = runtime.Types.Utils
+import $Extensions = runtime.Types.Extensions
+import $Result = runtime.Types.Result
+
+export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+
+/**
+ * Model Professor
+ * 
+ */
+export type Professor = $Result.DefaultSelection<Prisma.$ProfessorPayload>
+/**
+ * Model Aluno
+ * 
+ */
+export type Aluno = $Result.DefaultSelection<Prisma.$AlunoPayload>
+/**
+ * Model Turma
+ * 
+ */
+export type Turma = $Result.DefaultSelection<Prisma.$TurmaPayload>
+
+/**
+ * ##  Prisma Client ʲˢ
+ *
+ * Type-safe database client for TypeScript & Node.js
+ * @example
+ * ```
+ * const prisma = new PrismaClient()
+ * // Fetch zero or more Professors
+ * const professors = await prisma.professor.findMany()
+ * ```
+ *
+ *
+ * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+ */
+export class PrismaClient<
+  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
+> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+
+    /**
+   * ##  Prisma Client ʲˢ
+   *
+   * Type-safe database client for TypeScript & Node.js
+   * @example
+   * ```
+   * const prisma = new PrismaClient()
+   * // Fetch zero or more Professors
+   * const professors = await prisma.professor.findMany()
+   * ```
+   *
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
+   */
+
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+
+  /**
+   * Connect with the database
+   */
+  $connect(): $Utils.JsPromise<void>;
+
+  /**
+   * Disconnect from the database
+   */
+  $disconnect(): $Utils.JsPromise<void>;
+
+  /**
+   * Add a middleware
+   * @deprecated since 4.16.0. For new code, prefer client extensions instead.
+   * @see https://pris.ly/d/extensions
+   */
+  $use(cb: Prisma.Middleware): void
+
+/**
+   * Executes a prepared raw query and returns the number of affected rows.
+   * @example
+   * ```
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Executes a raw query and returns the number of affected rows.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Performs a prepared raw query and returns the `SELECT` data.
+   * @example
+   * ```
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
+
+  /**
+   * Performs a raw query and returns the `SELECT` data.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
+   */
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
+
+
+  /**
+   * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
+   * @example
+   * ```
+   * const [george, bob, alice] = await prisma.$transaction([
+   *   prisma.user.create({ data: { name: 'George' } }),
+   *   prisma.user.create({ data: { name: 'Bob' } }),
+   *   prisma.user.create({ data: { name: 'Alice' } }),
+   * ])
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   */
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+
+
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
+    extArgs: ExtArgs
+  }>>
+
+      /**
+   * `prisma.professor`: Exposes CRUD operations for the **Professor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Professors
+    * const professors = await prisma.professor.findMany()
+    * ```
+    */
+  get professor(): Prisma.ProfessorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.aluno`: Exposes CRUD operations for the **Aluno** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Alunos
+    * const alunos = await prisma.aluno.findMany()
+    * ```
+    */
+  get aluno(): Prisma.AlunoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.turma`: Exposes CRUD operations for the **Turma** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Turmas
+    * const turmas = await prisma.turma.findMany()
+    * ```
+    */
+  get turma(): Prisma.TurmaDelegate<ExtArgs, ClientOptions>;
+}
+
+export namespace Prisma {
+  export import DMMF = runtime.DMMF
+
+  export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+  /**
+   * Validator
+   */
+  export import validator = runtime.Public.validator
+
+  /**
+   * Prisma Errors
+   */
+  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
+  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
+  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
+  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
+  export import PrismaClientValidationError = runtime.PrismaClientValidationError
+
+  /**
+   * Re-export of sql-template-tag
+   */
+  export import sql = runtime.sqltag
+  export import empty = runtime.empty
+  export import join = runtime.join
+  export import raw = runtime.raw
+  export import Sql = runtime.Sql
+
+
+
+  /**
+   * Decimal.js
+   */
+  export import Decimal = runtime.Decimal
+
+  export type DecimalJsLike = runtime.DecimalJsLike
+
+  /**
+   * Metrics
+   */
+  export type Metrics = runtime.Metrics
+  export type Metric<T> = runtime.Metric<T>
+  export type MetricHistogram = runtime.MetricHistogram
+  export type MetricHistogramBucket = runtime.MetricHistogramBucket
+
+  /**
+  * Extensions
+  */
+  export import Extension = $Extensions.UserArgs
+  export import getExtensionContext = runtime.Extensions.getExtensionContext
+  export import Args = $Public.Args
+  export import Payload = $Public.Payload
+  export import Result = $Public.Result
+  export import Exact = $Public.Exact
+
+  /**
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   */
+  export type PrismaVersion = {
+    client: string
+  }
+
+  export const prismaVersion: PrismaVersion
+
+  /**
+   * Utility Types
+   */
+
+
+  export import JsonObject = runtime.JsonObject
+  export import JsonArray = runtime.JsonArray
+  export import JsonValue = runtime.JsonValue
+  export import InputJsonObject = runtime.InputJsonObject
+  export import InputJsonArray = runtime.InputJsonArray
+  export import InputJsonValue = runtime.InputJsonValue
+
+  /**
+   * Types of the values used to represent different kinds of `null` values when working with JSON fields.
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  namespace NullTypes {
+    /**
+    * Type of `Prisma.DbNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class DbNull {
+      private DbNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.JsonNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class JsonNull {
+      private JsonNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.AnyNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class AnyNull {
+      private AnyNull: never
+      private constructor()
+    }
+  }
+
+  /**
+   * Helper for filtering JSON entries that have `null` on the database (empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const DbNull: NullTypes.DbNull
+
+  /**
+   * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const JsonNull: NullTypes.JsonNull
+
+  /**
+   * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const AnyNull: NullTypes.AnyNull
+
+  type SelectAndInclude = {
+    select: any
+    include: any
+  }
+
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
+  /**
+   * Get the type of the value, that the Promise holds.
+   */
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+
+  /**
+   * Get the return type of a function which returns a Promise.
+   */
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
+
+  /**
+   * From T, pick a set of properties whose keys are in the union K
+   */
+  type Prisma__Pick<T, K extends keyof T> = {
+      [P in K]: T[P];
+  };
+
+
+  export type Enumerable<T> = T | Array<T>;
+
+  export type RequiredKeys<T> = {
+    [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
+  }[keyof T]
+
+  export type TruthyKeys<T> = keyof {
+    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K
+  }
+
+  export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>
+
+  /**
+   * Subset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
+   */
+  export type Subset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  };
+
+  /**
+   * SelectSubset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
+   * Additionally, it validates, if both select and include are present. If the case, it errors.
+   */
+  export type SelectSubset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    (T extends SelectAndInclude
+      ? 'Please either choose `select` or `include`.'
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
+
+  /**
+   * Subset + Intersection
+   * @desc From `T` pick properties that exist in `U` and intersect `K`
+   */
+  export type SubsetIntersection<T, U, K> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    K
+
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
+  /**
+   * XOR is needed to have a real mutually exclusive union type
+   * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
+   */
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
+
+
+  /**
+   * Is T a Record?
+   */
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Uint8Array
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
+
+  /**
+   * If it's T[], return T
+   */
+  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+
+  /**
+   * From ts-toolbelt
+   */
+
+  type __Either<O extends object, K extends Key> = Omit<O, K> &
+    {
+      // Merge all but K
+      [P in K]: Prisma__Pick<O, P & keyof O> // With K possibilities
+    }[K]
+
+  type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>
+
+  type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
+
+  type _Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean
+  > = {
+    1: EitherStrict<O, K>
+    0: EitherLoose<O, K>
+  }[strict]
+
+  type Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean = 1
+  > = O extends unknown ? _Either<O, K, strict> : never
+
+  export type Union = any
+
+  type PatchUndefined<O extends object, O1 extends object> = {
+    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K]
+  } & {}
+
+  /** Helper Types for "Merge" **/
+  export type IntersectOf<U extends Union> = (
+    U extends unknown ? (k: U) => void : never
+  ) extends (k: infer I) => void
+    ? I
+    : never
+
+  export type Overwrite<O extends object, O1 extends object> = {
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
+
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
+
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
+
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
+
+  export type OptionalFlat<O> = {
+    [K in keyof O]?: O[K];
+  } & {};
+
+  type _Record<K extends keyof any, T> = {
+    [P in K]: T;
+  };
+
+  // cause typescript not to expand types and preserve names
+  type NoExpand<T> = T extends unknown ? T : never;
+
+  // this type assumes the passed object is entirely optional
+  type AtLeast<O extends object, K extends string> = NoExpand<
+    O extends unknown
+    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
+    : never>;
+
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  /** End Helper Types for "Merge" **/
+
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+
+  /**
+  A [[Boolean]]
+  */
+  export type Boolean = True | False
+
+  // /**
+  // 1
+  // */
+  export type True = 1
+
+  /**
+  0
+  */
+  export type False = 0
+
+  export type Not<B extends Boolean> = {
+    0: 1
+    1: 0
+  }[B]
+
+  export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+    ? 0 // anything `never` is false
+    : A1 extends A2
+    ? 1
+    : 0
+
+  export type Has<U extends Union, U1 extends Union> = Not<
+    Extends<Exclude<U1, U>, U1>
+  >
+
+  export type Or<B1 extends Boolean, B2 extends Boolean> = {
+    0: {
+      0: 0
+      1: 1
+    }
+    1: {
+      0: 1
+      1: 1
+    }
+  }[B1][B2]
+
+  export type Keys<U extends Union> = U extends unknown ? keyof U : never
+
+  type Cast<A, B> = A extends B ? A : B;
+
+  export const type: unique symbol;
+
+
+
+  /**
+   * Used by group by
+   */
+
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
+
+  type FieldPaths<
+    T,
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
+  > = IsObject<T> extends True ? U : T
+
+  type GetHavingFields<T> = {
+    [K in keyof T]: Or<
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
+    > extends True
+      ? // infer is only needed to not hit TS limit
+        // based on the brilliant idea of Pierre-Antoine Mills
+        // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+        T[K] extends infer TK
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+        : never
+      : {} extends FieldPaths<T[K]>
+      ? never
+      : K
+  }[keyof T]
+
+  /**
+   * Convert tuple to union
+   */
+  type _TupleToUnion<T> = T extends (infer E)[] ? E : never
+  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
+
+  /**
+   * Like `Pick`, but additionally can also accept an array of keys
+   */
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
+
+  /**
+   * Exclude all keys with underscores
+   */
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
+
+  export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
+
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
+
+
+  export const ModelName: {
+    Professor: 'Professor',
+    Aluno: 'Aluno',
+    Turma: 'Turma'
+  };
+
+  export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
+
+  export type Datasources = {
+    db?: Datasource
+  }
+
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+  }
+
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
+    globalOmitOptions: {
+      omit: GlobalOmitOptions
+    }
+    meta: {
+      modelProps: "professor" | "aluno" | "turma"
+      txIsolationLevel: Prisma.TransactionIsolationLevel
+    }
+    model: {
+      Professor: {
+        payload: Prisma.$ProfessorPayload<ExtArgs>
+        fields: Prisma.ProfessorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProfessorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProfessorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>
+          }
+          findFirst: {
+            args: Prisma.ProfessorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProfessorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>
+          }
+          findMany: {
+            args: Prisma.ProfessorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>[]
+          }
+          create: {
+            args: Prisma.ProfessorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>
+          }
+          createMany: {
+            args: Prisma.ProfessorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProfessorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>[]
+          }
+          delete: {
+            args: Prisma.ProfessorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>
+          }
+          update: {
+            args: Prisma.ProfessorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProfessorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProfessorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProfessorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProfessorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProfessorPayload>
+          }
+          aggregate: {
+            args: Prisma.ProfessorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProfessor>
+          }
+          groupBy: {
+            args: Prisma.ProfessorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProfessorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProfessorCountArgs<ExtArgs>
+            result: $Utils.Optional<ProfessorCountAggregateOutputType> | number
+          }
+        }
+      }
+      Aluno: {
+        payload: Prisma.$AlunoPayload<ExtArgs>
+        fields: Prisma.AlunoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AlunoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AlunoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>
+          }
+          findFirst: {
+            args: Prisma.AlunoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AlunoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>
+          }
+          findMany: {
+            args: Prisma.AlunoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>[]
+          }
+          create: {
+            args: Prisma.AlunoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>
+          }
+          createMany: {
+            args: Prisma.AlunoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AlunoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>[]
+          }
+          delete: {
+            args: Prisma.AlunoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>
+          }
+          update: {
+            args: Prisma.AlunoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>
+          }
+          deleteMany: {
+            args: Prisma.AlunoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AlunoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AlunoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>[]
+          }
+          upsert: {
+            args: Prisma.AlunoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AlunoPayload>
+          }
+          aggregate: {
+            args: Prisma.AlunoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAluno>
+          }
+          groupBy: {
+            args: Prisma.AlunoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AlunoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AlunoCountArgs<ExtArgs>
+            result: $Utils.Optional<AlunoCountAggregateOutputType> | number
+          }
+        }
+      }
+      Turma: {
+        payload: Prisma.$TurmaPayload<ExtArgs>
+        fields: Prisma.TurmaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TurmaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TurmaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>
+          }
+          findFirst: {
+            args: Prisma.TurmaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TurmaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>
+          }
+          findMany: {
+            args: Prisma.TurmaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>[]
+          }
+          create: {
+            args: Prisma.TurmaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>
+          }
+          createMany: {
+            args: Prisma.TurmaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TurmaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>[]
+          }
+          delete: {
+            args: Prisma.TurmaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>
+          }
+          update: {
+            args: Prisma.TurmaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>
+          }
+          deleteMany: {
+            args: Prisma.TurmaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TurmaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TurmaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>[]
+          }
+          upsert: {
+            args: Prisma.TurmaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurmaPayload>
+          }
+          aggregate: {
+            args: Prisma.TurmaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTurma>
+          }
+          groupBy: {
+            args: Prisma.TurmaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TurmaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TurmaCountArgs<ExtArgs>
+            result: $Utils.Optional<TurmaCountAggregateOutputType> | number
+          }
+        }
+      }
+    }
+  } & {
+    other: {
+      payload: any
+      operations: {
+        $executeRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $executeRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+        $queryRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $queryRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+      }
+    }
+  }
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export type DefaultPrismaClient = PrismaClient
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
+  export interface PrismaClientOptions {
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasources?: Datasources
+    /**
+     * Overwrites the datasource url from your schema.prisma file
+     */
+    datasourceUrl?: string
+    /**
+     * @default "colorless"
+     */
+    errorFormat?: ErrorFormat
+    /**
+     * @example
+     * ```
+     * // Defaults to stdout
+     * log: ['query', 'info', 'warn', 'error']
+     * 
+     * // Emit as events
+     * log: [
+     *   { emit: 'stdout', level: 'query' },
+     *   { emit: 'stdout', level: 'info' },
+     *   { emit: 'stdout', level: 'warn' }
+     *   { emit: 'stdout', level: 'error' }
+     * ]
+     * ```
+     * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
+     */
+    log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
+    /**
+     * Global configuration for omitting model fields by default.
+     * 
+     * @example
+     * ```
+     * const prisma = new PrismaClient({
+     *   omit: {
+     *     user: {
+     *       password: true
+     *     }
+     *   }
+     * })
+     * ```
+     */
+    omit?: Prisma.GlobalOmitConfig
+  }
+  export type GlobalOmitConfig = {
+    professor?: ProfessorOmit
+    aluno?: AlunoOmit
+    turma?: TurmaOmit
+  }
+
+  /* Types for Logging */
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
+  export type LogDefinition = {
+    level: LogLevel
+    emit: 'stdout' | 'event'
+  }
+
+  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
+  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
+    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
+    : never
+
+  export type QueryEvent = {
+    timestamp: Date
+    query: string
+    params: string
+    duration: number
+    target: string
+  }
+
+  export type LogEvent = {
+    timestamp: Date
+    message: string
+    target: string
+  }
+  /* End Types for Logging */
+
+
+  export type PrismaAction =
+    | 'findUnique'
+    | 'findUniqueOrThrow'
+    | 'findMany'
+    | 'findFirst'
+    | 'findFirstOrThrow'
+    | 'create'
+    | 'createMany'
+    | 'createManyAndReturn'
+    | 'update'
+    | 'updateMany'
+    | 'updateManyAndReturn'
+    | 'upsert'
+    | 'delete'
+    | 'deleteMany'
+    | 'executeRaw'
+    | 'queryRaw'
+    | 'aggregate'
+    | 'count'
+    | 'runCommandRaw'
+    | 'findRaw'
+    | 'groupBy'
+
+  /**
+   * These options are being passed into the middleware as "params"
+   */
+  export type MiddlewareParams = {
+    model?: ModelName
+    action: PrismaAction
+    args: any
+    dataPath: string[]
+    runInTransaction: boolean
+  }
+
+  /**
+   * The `T` type makes sure, that the `return proceed` is not forgotten in the middleware implementation
+   */
+  export type Middleware<T = any> = (
+    params: MiddlewareParams,
+    next: (params: MiddlewareParams) => $Utils.JsPromise<T>,
+  ) => $Utils.JsPromise<T>
+
+  // tested in getLogLevel.test.ts
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+
+  /**
+   * `PrismaClient` proxy available in interactive transactions.
+   */
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
+
+  export type Datasource = {
+    url?: string
+  }
+
+  /**
+   * Count Types
+   */
+
+
+  /**
+   * Count Type ProfessorCountOutputType
+   */
+
+  export type ProfessorCountOutputType = {
+    turmas: number
+  }
+
+  export type ProfessorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    turmas?: boolean | ProfessorCountOutputTypeCountTurmasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProfessorCountOutputType without action
+   */
+  export type ProfessorCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProfessorCountOutputType
+     */
+    select?: ProfessorCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProfessorCountOutputType without action
+   */
+  export type ProfessorCountOutputTypeCountTurmasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TurmaWhereInput
+  }
+
+
+  /**
+   * Count Type AlunoCountOutputType
+   */
+
+  export type AlunoCountOutputType = {
+    turmas: number
+  }
+
+  export type AlunoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    turmas?: boolean | AlunoCountOutputTypeCountTurmasArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AlunoCountOutputType without action
+   */
+  export type AlunoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AlunoCountOutputType
+     */
+    select?: AlunoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AlunoCountOutputType without action
+   */
+  export type AlunoCountOutputTypeCountTurmasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TurmaWhereInput
+  }
+
+
+  /**
+   * Count Type TurmaCountOutputType
+   */
+
+  export type TurmaCountOutputType = {
+    alunos: number
+  }
+
+  export type TurmaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    alunos?: boolean | TurmaCountOutputTypeCountAlunosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TurmaCountOutputType without action
+   */
+  export type TurmaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurmaCountOutputType
+     */
+    select?: TurmaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TurmaCountOutputType without action
+   */
+  export type TurmaCountOutputTypeCountAlunosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AlunoWhereInput
+  }
+
+
+  /**
+   * Models
+   */
+
+  /**
+   * Model Professor
+   */
+
+  export type AggregateProfessor = {
+    _count: ProfessorCountAggregateOutputType | null
+    _avg: ProfessorAvgAggregateOutputType | null
+    _sum: ProfessorSumAggregateOutputType | null
+    _min: ProfessorMinAggregateOutputType | null
+    _max: ProfessorMaxAggregateOutputType | null
+  }
+
+  export type ProfessorAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProfessorSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProfessorMinAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    email: string | null
+  }
+
+  export type ProfessorMaxAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    email: string | null
+  }
+
+  export type ProfessorCountAggregateOutputType = {
+    id: number
+    nome: number
+    email: number
+    _all: number
+  }
+
+
+  export type ProfessorAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ProfessorSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ProfessorMinAggregateInputType = {
+    id?: true
+    nome?: true
+    email?: true
+  }
+
+  export type ProfessorMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    email?: true
+  }
+
+  export type ProfessorCountAggregateInputType = {
+    id?: true
+    nome?: true
+    email?: true
+    _all?: true
+  }
+
+  export type ProfessorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Professor to aggregate.
+     */
+    where?: ProfessorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Professors to fetch.
+     */
+    orderBy?: ProfessorOrderByWithRelationInput | ProfessorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProfessorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Professors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Professors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Professors
+    **/
+    _count?: true | ProfessorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProfessorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProfessorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProfessorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProfessorMaxAggregateInputType
+  }
+
+  export type GetProfessorAggregateType<T extends ProfessorAggregateArgs> = {
+        [P in keyof T & keyof AggregateProfessor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProfessor[P]>
+      : GetScalarType<T[P], AggregateProfessor[P]>
+  }
+
+
+
+
+  export type ProfessorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProfessorWhereInput
+    orderBy?: ProfessorOrderByWithAggregationInput | ProfessorOrderByWithAggregationInput[]
+    by: ProfessorScalarFieldEnum[] | ProfessorScalarFieldEnum
+    having?: ProfessorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProfessorCountAggregateInputType | true
+    _avg?: ProfessorAvgAggregateInputType
+    _sum?: ProfessorSumAggregateInputType
+    _min?: ProfessorMinAggregateInputType
+    _max?: ProfessorMaxAggregateInputType
+  }
+
+  export type ProfessorGroupByOutputType = {
+    id: number
+    nome: string
+    email: string
+    _count: ProfessorCountAggregateOutputType | null
+    _avg: ProfessorAvgAggregateOutputType | null
+    _sum: ProfessorSumAggregateOutputType | null
+    _min: ProfessorMinAggregateOutputType | null
+    _max: ProfessorMaxAggregateOutputType | null
+  }
+
+  type GetProfessorGroupByPayload<T extends ProfessorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProfessorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProfessorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProfessorGroupByOutputType[P]>
+            : GetScalarType<T[P], ProfessorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProfessorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    email?: boolean
+    turmas?: boolean | Professor$turmasArgs<ExtArgs>
+    _count?: boolean | ProfessorCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["professor"]>
+
+  export type ProfessorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    email?: boolean
+  }, ExtArgs["result"]["professor"]>
+
+  export type ProfessorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    email?: boolean
+  }, ExtArgs["result"]["professor"]>
+
+  export type ProfessorSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    email?: boolean
+  }
+
+  export type ProfessorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "email", ExtArgs["result"]["professor"]>
+  export type ProfessorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    turmas?: boolean | Professor$turmasArgs<ExtArgs>
+    _count?: boolean | ProfessorCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProfessorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProfessorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ProfessorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Professor"
+    objects: {
+      turmas: Prisma.$TurmaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nome: string
+      email: string
+    }, ExtArgs["result"]["professor"]>
+    composites: {}
+  }
+
+  type ProfessorGetPayload<S extends boolean | null | undefined | ProfessorDefaultArgs> = $Result.GetResult<Prisma.$ProfessorPayload, S>
+
+  type ProfessorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProfessorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProfessorCountAggregateInputType | true
+    }
+
+  export interface ProfessorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Professor'], meta: { name: 'Professor' } }
+    /**
+     * Find zero or one Professor that matches the filter.
+     * @param {ProfessorFindUniqueArgs} args - Arguments to find a Professor
+     * @example
+     * // Get one Professor
+     * const professor = await prisma.professor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProfessorFindUniqueArgs>(args: SelectSubset<T, ProfessorFindUniqueArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Professor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProfessorFindUniqueOrThrowArgs} args - Arguments to find a Professor
+     * @example
+     * // Get one Professor
+     * const professor = await prisma.professor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProfessorFindUniqueOrThrowArgs>(args: SelectSubset<T, ProfessorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Professor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorFindFirstArgs} args - Arguments to find a Professor
+     * @example
+     * // Get one Professor
+     * const professor = await prisma.professor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProfessorFindFirstArgs>(args?: SelectSubset<T, ProfessorFindFirstArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Professor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorFindFirstOrThrowArgs} args - Arguments to find a Professor
+     * @example
+     * // Get one Professor
+     * const professor = await prisma.professor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProfessorFindFirstOrThrowArgs>(args?: SelectSubset<T, ProfessorFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Professors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Professors
+     * const professors = await prisma.professor.findMany()
+     * 
+     * // Get first 10 Professors
+     * const professors = await prisma.professor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const professorWithIdOnly = await prisma.professor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProfessorFindManyArgs>(args?: SelectSubset<T, ProfessorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Professor.
+     * @param {ProfessorCreateArgs} args - Arguments to create a Professor.
+     * @example
+     * // Create one Professor
+     * const Professor = await prisma.professor.create({
+     *   data: {
+     *     // ... data to create a Professor
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProfessorCreateArgs>(args: SelectSubset<T, ProfessorCreateArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Professors.
+     * @param {ProfessorCreateManyArgs} args - Arguments to create many Professors.
+     * @example
+     * // Create many Professors
+     * const professor = await prisma.professor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProfessorCreateManyArgs>(args?: SelectSubset<T, ProfessorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Professors and returns the data saved in the database.
+     * @param {ProfessorCreateManyAndReturnArgs} args - Arguments to create many Professors.
+     * @example
+     * // Create many Professors
+     * const professor = await prisma.professor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Professors and only return the `id`
+     * const professorWithIdOnly = await prisma.professor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProfessorCreateManyAndReturnArgs>(args?: SelectSubset<T, ProfessorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Professor.
+     * @param {ProfessorDeleteArgs} args - Arguments to delete one Professor.
+     * @example
+     * // Delete one Professor
+     * const Professor = await prisma.professor.delete({
+     *   where: {
+     *     // ... filter to delete one Professor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProfessorDeleteArgs>(args: SelectSubset<T, ProfessorDeleteArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Professor.
+     * @param {ProfessorUpdateArgs} args - Arguments to update one Professor.
+     * @example
+     * // Update one Professor
+     * const professor = await prisma.professor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProfessorUpdateArgs>(args: SelectSubset<T, ProfessorUpdateArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Professors.
+     * @param {ProfessorDeleteManyArgs} args - Arguments to filter Professors to delete.
+     * @example
+     * // Delete a few Professors
+     * const { count } = await prisma.professor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProfessorDeleteManyArgs>(args?: SelectSubset<T, ProfessorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Professors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Professors
+     * const professor = await prisma.professor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProfessorUpdateManyArgs>(args: SelectSubset<T, ProfessorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Professors and returns the data updated in the database.
+     * @param {ProfessorUpdateManyAndReturnArgs} args - Arguments to update many Professors.
+     * @example
+     * // Update many Professors
+     * const professor = await prisma.professor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Professors and only return the `id`
+     * const professorWithIdOnly = await prisma.professor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProfessorUpdateManyAndReturnArgs>(args: SelectSubset<T, ProfessorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Professor.
+     * @param {ProfessorUpsertArgs} args - Arguments to update or create a Professor.
+     * @example
+     * // Update or create a Professor
+     * const professor = await prisma.professor.upsert({
+     *   create: {
+     *     // ... data to create a Professor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Professor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProfessorUpsertArgs>(args: SelectSubset<T, ProfessorUpsertArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Professors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorCountArgs} args - Arguments to filter Professors to count.
+     * @example
+     * // Count the number of Professors
+     * const count = await prisma.professor.count({
+     *   where: {
+     *     // ... the filter for the Professors we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProfessorCountArgs>(
+      args?: Subset<T, ProfessorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProfessorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Professor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProfessorAggregateArgs>(args: Subset<T, ProfessorAggregateArgs>): Prisma.PrismaPromise<GetProfessorAggregateType<T>>
+
+    /**
+     * Group by Professor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProfessorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProfessorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProfessorGroupByArgs['orderBy'] }
+        : { orderBy?: ProfessorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProfessorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProfessorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Professor model
+   */
+  readonly fields: ProfessorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Professor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProfessorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    turmas<T extends Professor$turmasArgs<ExtArgs> = {}>(args?: Subset<T, Professor$turmasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Professor model
+   */
+  interface ProfessorFieldRefs {
+    readonly id: FieldRef<"Professor", 'Int'>
+    readonly nome: FieldRef<"Professor", 'String'>
+    readonly email: FieldRef<"Professor", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Professor findUnique
+   */
+  export type ProfessorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * Filter, which Professor to fetch.
+     */
+    where: ProfessorWhereUniqueInput
+  }
+
+  /**
+   * Professor findUniqueOrThrow
+   */
+  export type ProfessorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * Filter, which Professor to fetch.
+     */
+    where: ProfessorWhereUniqueInput
+  }
+
+  /**
+   * Professor findFirst
+   */
+  export type ProfessorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * Filter, which Professor to fetch.
+     */
+    where?: ProfessorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Professors to fetch.
+     */
+    orderBy?: ProfessorOrderByWithRelationInput | ProfessorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Professors.
+     */
+    cursor?: ProfessorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Professors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Professors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Professors.
+     */
+    distinct?: ProfessorScalarFieldEnum | ProfessorScalarFieldEnum[]
+  }
+
+  /**
+   * Professor findFirstOrThrow
+   */
+  export type ProfessorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * Filter, which Professor to fetch.
+     */
+    where?: ProfessorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Professors to fetch.
+     */
+    orderBy?: ProfessorOrderByWithRelationInput | ProfessorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Professors.
+     */
+    cursor?: ProfessorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Professors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Professors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Professors.
+     */
+    distinct?: ProfessorScalarFieldEnum | ProfessorScalarFieldEnum[]
+  }
+
+  /**
+   * Professor findMany
+   */
+  export type ProfessorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * Filter, which Professors to fetch.
+     */
+    where?: ProfessorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Professors to fetch.
+     */
+    orderBy?: ProfessorOrderByWithRelationInput | ProfessorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Professors.
+     */
+    cursor?: ProfessorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Professors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Professors.
+     */
+    skip?: number
+    distinct?: ProfessorScalarFieldEnum | ProfessorScalarFieldEnum[]
+  }
+
+  /**
+   * Professor create
+   */
+  export type ProfessorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Professor.
+     */
+    data: XOR<ProfessorCreateInput, ProfessorUncheckedCreateInput>
+  }
+
+  /**
+   * Professor createMany
+   */
+  export type ProfessorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Professors.
+     */
+    data: ProfessorCreateManyInput | ProfessorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Professor createManyAndReturn
+   */
+  export type ProfessorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Professors.
+     */
+    data: ProfessorCreateManyInput | ProfessorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Professor update
+   */
+  export type ProfessorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Professor.
+     */
+    data: XOR<ProfessorUpdateInput, ProfessorUncheckedUpdateInput>
+    /**
+     * Choose, which Professor to update.
+     */
+    where: ProfessorWhereUniqueInput
+  }
+
+  /**
+   * Professor updateMany
+   */
+  export type ProfessorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Professors.
+     */
+    data: XOR<ProfessorUpdateManyMutationInput, ProfessorUncheckedUpdateManyInput>
+    /**
+     * Filter which Professors to update
+     */
+    where?: ProfessorWhereInput
+    /**
+     * Limit how many Professors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Professor updateManyAndReturn
+   */
+  export type ProfessorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * The data used to update Professors.
+     */
+    data: XOR<ProfessorUpdateManyMutationInput, ProfessorUncheckedUpdateManyInput>
+    /**
+     * Filter which Professors to update
+     */
+    where?: ProfessorWhereInput
+    /**
+     * Limit how many Professors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Professor upsert
+   */
+  export type ProfessorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Professor to update in case it exists.
+     */
+    where: ProfessorWhereUniqueInput
+    /**
+     * In case the Professor found by the `where` argument doesn't exist, create a new Professor with this data.
+     */
+    create: XOR<ProfessorCreateInput, ProfessorUncheckedCreateInput>
+    /**
+     * In case the Professor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProfessorUpdateInput, ProfessorUncheckedUpdateInput>
+  }
+
+  /**
+   * Professor delete
+   */
+  export type ProfessorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+    /**
+     * Filter which Professor to delete.
+     */
+    where: ProfessorWhereUniqueInput
+  }
+
+  /**
+   * Professor deleteMany
+   */
+  export type ProfessorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Professors to delete
+     */
+    where?: ProfessorWhereInput
+    /**
+     * Limit how many Professors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Professor.turmas
+   */
+  export type Professor$turmasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    where?: TurmaWhereInput
+    orderBy?: TurmaOrderByWithRelationInput | TurmaOrderByWithRelationInput[]
+    cursor?: TurmaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TurmaScalarFieldEnum | TurmaScalarFieldEnum[]
+  }
+
+  /**
+   * Professor without action
+   */
+  export type ProfessorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Professor
+     */
+    select?: ProfessorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Professor
+     */
+    omit?: ProfessorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfessorInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Aluno
+   */
+
+  export type AggregateAluno = {
+    _count: AlunoCountAggregateOutputType | null
+    _avg: AlunoAvgAggregateOutputType | null
+    _sum: AlunoSumAggregateOutputType | null
+    _min: AlunoMinAggregateOutputType | null
+    _max: AlunoMaxAggregateOutputType | null
+  }
+
+  export type AlunoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AlunoSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AlunoMinAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    matricula: string | null
+  }
+
+  export type AlunoMaxAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    matricula: string | null
+  }
+
+  export type AlunoCountAggregateOutputType = {
+    id: number
+    nome: number
+    matricula: number
+    _all: number
+  }
+
+
+  export type AlunoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AlunoSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AlunoMinAggregateInputType = {
+    id?: true
+    nome?: true
+    matricula?: true
+  }
+
+  export type AlunoMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    matricula?: true
+  }
+
+  export type AlunoCountAggregateInputType = {
+    id?: true
+    nome?: true
+    matricula?: true
+    _all?: true
+  }
+
+  export type AlunoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Aluno to aggregate.
+     */
+    where?: AlunoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Alunos to fetch.
+     */
+    orderBy?: AlunoOrderByWithRelationInput | AlunoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AlunoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Alunos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Alunos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Alunos
+    **/
+    _count?: true | AlunoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AlunoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AlunoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AlunoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AlunoMaxAggregateInputType
+  }
+
+  export type GetAlunoAggregateType<T extends AlunoAggregateArgs> = {
+        [P in keyof T & keyof AggregateAluno]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAluno[P]>
+      : GetScalarType<T[P], AggregateAluno[P]>
+  }
+
+
+
+
+  export type AlunoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AlunoWhereInput
+    orderBy?: AlunoOrderByWithAggregationInput | AlunoOrderByWithAggregationInput[]
+    by: AlunoScalarFieldEnum[] | AlunoScalarFieldEnum
+    having?: AlunoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AlunoCountAggregateInputType | true
+    _avg?: AlunoAvgAggregateInputType
+    _sum?: AlunoSumAggregateInputType
+    _min?: AlunoMinAggregateInputType
+    _max?: AlunoMaxAggregateInputType
+  }
+
+  export type AlunoGroupByOutputType = {
+    id: number
+    nome: string
+    matricula: string
+    _count: AlunoCountAggregateOutputType | null
+    _avg: AlunoAvgAggregateOutputType | null
+    _sum: AlunoSumAggregateOutputType | null
+    _min: AlunoMinAggregateOutputType | null
+    _max: AlunoMaxAggregateOutputType | null
+  }
+
+  type GetAlunoGroupByPayload<T extends AlunoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AlunoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AlunoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AlunoGroupByOutputType[P]>
+            : GetScalarType<T[P], AlunoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AlunoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    matricula?: boolean
+    turmas?: boolean | Aluno$turmasArgs<ExtArgs>
+    _count?: boolean | AlunoCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["aluno"]>
+
+  export type AlunoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    matricula?: boolean
+  }, ExtArgs["result"]["aluno"]>
+
+  export type AlunoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    matricula?: boolean
+  }, ExtArgs["result"]["aluno"]>
+
+  export type AlunoSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    matricula?: boolean
+  }
+
+  export type AlunoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "matricula", ExtArgs["result"]["aluno"]>
+  export type AlunoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    turmas?: boolean | Aluno$turmasArgs<ExtArgs>
+    _count?: boolean | AlunoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AlunoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AlunoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AlunoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Aluno"
+    objects: {
+      turmas: Prisma.$TurmaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nome: string
+      matricula: string
+    }, ExtArgs["result"]["aluno"]>
+    composites: {}
+  }
+
+  type AlunoGetPayload<S extends boolean | null | undefined | AlunoDefaultArgs> = $Result.GetResult<Prisma.$AlunoPayload, S>
+
+  type AlunoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AlunoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AlunoCountAggregateInputType | true
+    }
+
+  export interface AlunoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Aluno'], meta: { name: 'Aluno' } }
+    /**
+     * Find zero or one Aluno that matches the filter.
+     * @param {AlunoFindUniqueArgs} args - Arguments to find a Aluno
+     * @example
+     * // Get one Aluno
+     * const aluno = await prisma.aluno.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AlunoFindUniqueArgs>(args: SelectSubset<T, AlunoFindUniqueArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Aluno that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AlunoFindUniqueOrThrowArgs} args - Arguments to find a Aluno
+     * @example
+     * // Get one Aluno
+     * const aluno = await prisma.aluno.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AlunoFindUniqueOrThrowArgs>(args: SelectSubset<T, AlunoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Aluno that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoFindFirstArgs} args - Arguments to find a Aluno
+     * @example
+     * // Get one Aluno
+     * const aluno = await prisma.aluno.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AlunoFindFirstArgs>(args?: SelectSubset<T, AlunoFindFirstArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Aluno that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoFindFirstOrThrowArgs} args - Arguments to find a Aluno
+     * @example
+     * // Get one Aluno
+     * const aluno = await prisma.aluno.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AlunoFindFirstOrThrowArgs>(args?: SelectSubset<T, AlunoFindFirstOrThrowArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Alunos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Alunos
+     * const alunos = await prisma.aluno.findMany()
+     * 
+     * // Get first 10 Alunos
+     * const alunos = await prisma.aluno.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const alunoWithIdOnly = await prisma.aluno.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AlunoFindManyArgs>(args?: SelectSubset<T, AlunoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Aluno.
+     * @param {AlunoCreateArgs} args - Arguments to create a Aluno.
+     * @example
+     * // Create one Aluno
+     * const Aluno = await prisma.aluno.create({
+     *   data: {
+     *     // ... data to create a Aluno
+     *   }
+     * })
+     * 
+     */
+    create<T extends AlunoCreateArgs>(args: SelectSubset<T, AlunoCreateArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Alunos.
+     * @param {AlunoCreateManyArgs} args - Arguments to create many Alunos.
+     * @example
+     * // Create many Alunos
+     * const aluno = await prisma.aluno.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AlunoCreateManyArgs>(args?: SelectSubset<T, AlunoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Alunos and returns the data saved in the database.
+     * @param {AlunoCreateManyAndReturnArgs} args - Arguments to create many Alunos.
+     * @example
+     * // Create many Alunos
+     * const aluno = await prisma.aluno.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Alunos and only return the `id`
+     * const alunoWithIdOnly = await prisma.aluno.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AlunoCreateManyAndReturnArgs>(args?: SelectSubset<T, AlunoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Aluno.
+     * @param {AlunoDeleteArgs} args - Arguments to delete one Aluno.
+     * @example
+     * // Delete one Aluno
+     * const Aluno = await prisma.aluno.delete({
+     *   where: {
+     *     // ... filter to delete one Aluno
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AlunoDeleteArgs>(args: SelectSubset<T, AlunoDeleteArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Aluno.
+     * @param {AlunoUpdateArgs} args - Arguments to update one Aluno.
+     * @example
+     * // Update one Aluno
+     * const aluno = await prisma.aluno.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AlunoUpdateArgs>(args: SelectSubset<T, AlunoUpdateArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Alunos.
+     * @param {AlunoDeleteManyArgs} args - Arguments to filter Alunos to delete.
+     * @example
+     * // Delete a few Alunos
+     * const { count } = await prisma.aluno.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AlunoDeleteManyArgs>(args?: SelectSubset<T, AlunoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Alunos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Alunos
+     * const aluno = await prisma.aluno.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AlunoUpdateManyArgs>(args: SelectSubset<T, AlunoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Alunos and returns the data updated in the database.
+     * @param {AlunoUpdateManyAndReturnArgs} args - Arguments to update many Alunos.
+     * @example
+     * // Update many Alunos
+     * const aluno = await prisma.aluno.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Alunos and only return the `id`
+     * const alunoWithIdOnly = await prisma.aluno.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AlunoUpdateManyAndReturnArgs>(args: SelectSubset<T, AlunoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Aluno.
+     * @param {AlunoUpsertArgs} args - Arguments to update or create a Aluno.
+     * @example
+     * // Update or create a Aluno
+     * const aluno = await prisma.aluno.upsert({
+     *   create: {
+     *     // ... data to create a Aluno
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Aluno we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AlunoUpsertArgs>(args: SelectSubset<T, AlunoUpsertArgs<ExtArgs>>): Prisma__AlunoClient<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Alunos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoCountArgs} args - Arguments to filter Alunos to count.
+     * @example
+     * // Count the number of Alunos
+     * const count = await prisma.aluno.count({
+     *   where: {
+     *     // ... the filter for the Alunos we want to count
+     *   }
+     * })
+    **/
+    count<T extends AlunoCountArgs>(
+      args?: Subset<T, AlunoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AlunoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Aluno.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AlunoAggregateArgs>(args: Subset<T, AlunoAggregateArgs>): Prisma.PrismaPromise<GetAlunoAggregateType<T>>
+
+    /**
+     * Group by Aluno.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AlunoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AlunoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AlunoGroupByArgs['orderBy'] }
+        : { orderBy?: AlunoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AlunoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAlunoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Aluno model
+   */
+  readonly fields: AlunoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Aluno.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AlunoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    turmas<T extends Aluno$turmasArgs<ExtArgs> = {}>(args?: Subset<T, Aluno$turmasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Aluno model
+   */
+  interface AlunoFieldRefs {
+    readonly id: FieldRef<"Aluno", 'Int'>
+    readonly nome: FieldRef<"Aluno", 'String'>
+    readonly matricula: FieldRef<"Aluno", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Aluno findUnique
+   */
+  export type AlunoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * Filter, which Aluno to fetch.
+     */
+    where: AlunoWhereUniqueInput
+  }
+
+  /**
+   * Aluno findUniqueOrThrow
+   */
+  export type AlunoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * Filter, which Aluno to fetch.
+     */
+    where: AlunoWhereUniqueInput
+  }
+
+  /**
+   * Aluno findFirst
+   */
+  export type AlunoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * Filter, which Aluno to fetch.
+     */
+    where?: AlunoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Alunos to fetch.
+     */
+    orderBy?: AlunoOrderByWithRelationInput | AlunoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Alunos.
+     */
+    cursor?: AlunoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Alunos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Alunos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Alunos.
+     */
+    distinct?: AlunoScalarFieldEnum | AlunoScalarFieldEnum[]
+  }
+
+  /**
+   * Aluno findFirstOrThrow
+   */
+  export type AlunoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * Filter, which Aluno to fetch.
+     */
+    where?: AlunoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Alunos to fetch.
+     */
+    orderBy?: AlunoOrderByWithRelationInput | AlunoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Alunos.
+     */
+    cursor?: AlunoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Alunos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Alunos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Alunos.
+     */
+    distinct?: AlunoScalarFieldEnum | AlunoScalarFieldEnum[]
+  }
+
+  /**
+   * Aluno findMany
+   */
+  export type AlunoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * Filter, which Alunos to fetch.
+     */
+    where?: AlunoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Alunos to fetch.
+     */
+    orderBy?: AlunoOrderByWithRelationInput | AlunoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Alunos.
+     */
+    cursor?: AlunoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Alunos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Alunos.
+     */
+    skip?: number
+    distinct?: AlunoScalarFieldEnum | AlunoScalarFieldEnum[]
+  }
+
+  /**
+   * Aluno create
+   */
+  export type AlunoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Aluno.
+     */
+    data: XOR<AlunoCreateInput, AlunoUncheckedCreateInput>
+  }
+
+  /**
+   * Aluno createMany
+   */
+  export type AlunoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Alunos.
+     */
+    data: AlunoCreateManyInput | AlunoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Aluno createManyAndReturn
+   */
+  export type AlunoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Alunos.
+     */
+    data: AlunoCreateManyInput | AlunoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Aluno update
+   */
+  export type AlunoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Aluno.
+     */
+    data: XOR<AlunoUpdateInput, AlunoUncheckedUpdateInput>
+    /**
+     * Choose, which Aluno to update.
+     */
+    where: AlunoWhereUniqueInput
+  }
+
+  /**
+   * Aluno updateMany
+   */
+  export type AlunoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Alunos.
+     */
+    data: XOR<AlunoUpdateManyMutationInput, AlunoUncheckedUpdateManyInput>
+    /**
+     * Filter which Alunos to update
+     */
+    where?: AlunoWhereInput
+    /**
+     * Limit how many Alunos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Aluno updateManyAndReturn
+   */
+  export type AlunoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * The data used to update Alunos.
+     */
+    data: XOR<AlunoUpdateManyMutationInput, AlunoUncheckedUpdateManyInput>
+    /**
+     * Filter which Alunos to update
+     */
+    where?: AlunoWhereInput
+    /**
+     * Limit how many Alunos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Aluno upsert
+   */
+  export type AlunoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Aluno to update in case it exists.
+     */
+    where: AlunoWhereUniqueInput
+    /**
+     * In case the Aluno found by the `where` argument doesn't exist, create a new Aluno with this data.
+     */
+    create: XOR<AlunoCreateInput, AlunoUncheckedCreateInput>
+    /**
+     * In case the Aluno was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AlunoUpdateInput, AlunoUncheckedUpdateInput>
+  }
+
+  /**
+   * Aluno delete
+   */
+  export type AlunoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    /**
+     * Filter which Aluno to delete.
+     */
+    where: AlunoWhereUniqueInput
+  }
+
+  /**
+   * Aluno deleteMany
+   */
+  export type AlunoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Alunos to delete
+     */
+    where?: AlunoWhereInput
+    /**
+     * Limit how many Alunos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Aluno.turmas
+   */
+  export type Aluno$turmasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    where?: TurmaWhereInput
+    orderBy?: TurmaOrderByWithRelationInput | TurmaOrderByWithRelationInput[]
+    cursor?: TurmaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TurmaScalarFieldEnum | TurmaScalarFieldEnum[]
+  }
+
+  /**
+   * Aluno without action
+   */
+  export type AlunoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Turma
+   */
+
+  export type AggregateTurma = {
+    _count: TurmaCountAggregateOutputType | null
+    _avg: TurmaAvgAggregateOutputType | null
+    _sum: TurmaSumAggregateOutputType | null
+    _min: TurmaMinAggregateOutputType | null
+    _max: TurmaMaxAggregateOutputType | null
+  }
+
+  export type TurmaAvgAggregateOutputType = {
+    id: number | null
+    professorId: number | null
+  }
+
+  export type TurmaSumAggregateOutputType = {
+    id: number | null
+    professorId: number | null
+  }
+
+  export type TurmaMinAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    professorId: number | null
+  }
+
+  export type TurmaMaxAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    professorId: number | null
+  }
+
+  export type TurmaCountAggregateOutputType = {
+    id: number
+    nome: number
+    professorId: number
+    _all: number
+  }
+
+
+  export type TurmaAvgAggregateInputType = {
+    id?: true
+    professorId?: true
+  }
+
+  export type TurmaSumAggregateInputType = {
+    id?: true
+    professorId?: true
+  }
+
+  export type TurmaMinAggregateInputType = {
+    id?: true
+    nome?: true
+    professorId?: true
+  }
+
+  export type TurmaMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    professorId?: true
+  }
+
+  export type TurmaCountAggregateInputType = {
+    id?: true
+    nome?: true
+    professorId?: true
+    _all?: true
+  }
+
+  export type TurmaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Turma to aggregate.
+     */
+    where?: TurmaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Turmas to fetch.
+     */
+    orderBy?: TurmaOrderByWithRelationInput | TurmaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TurmaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Turmas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Turmas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Turmas
+    **/
+    _count?: true | TurmaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TurmaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TurmaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TurmaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TurmaMaxAggregateInputType
+  }
+
+  export type GetTurmaAggregateType<T extends TurmaAggregateArgs> = {
+        [P in keyof T & keyof AggregateTurma]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTurma[P]>
+      : GetScalarType<T[P], AggregateTurma[P]>
+  }
+
+
+
+
+  export type TurmaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TurmaWhereInput
+    orderBy?: TurmaOrderByWithAggregationInput | TurmaOrderByWithAggregationInput[]
+    by: TurmaScalarFieldEnum[] | TurmaScalarFieldEnum
+    having?: TurmaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TurmaCountAggregateInputType | true
+    _avg?: TurmaAvgAggregateInputType
+    _sum?: TurmaSumAggregateInputType
+    _min?: TurmaMinAggregateInputType
+    _max?: TurmaMaxAggregateInputType
+  }
+
+  export type TurmaGroupByOutputType = {
+    id: number
+    nome: string
+    professorId: number
+    _count: TurmaCountAggregateOutputType | null
+    _avg: TurmaAvgAggregateOutputType | null
+    _sum: TurmaSumAggregateOutputType | null
+    _min: TurmaMinAggregateOutputType | null
+    _max: TurmaMaxAggregateOutputType | null
+  }
+
+  type GetTurmaGroupByPayload<T extends TurmaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TurmaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TurmaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TurmaGroupByOutputType[P]>
+            : GetScalarType<T[P], TurmaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TurmaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    professorId?: boolean
+    professor?: boolean | ProfessorDefaultArgs<ExtArgs>
+    alunos?: boolean | Turma$alunosArgs<ExtArgs>
+    _count?: boolean | TurmaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["turma"]>
+
+  export type TurmaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    professorId?: boolean
+    professor?: boolean | ProfessorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["turma"]>
+
+  export type TurmaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    professorId?: boolean
+    professor?: boolean | ProfessorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["turma"]>
+
+  export type TurmaSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    professorId?: boolean
+  }
+
+  export type TurmaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "professorId", ExtArgs["result"]["turma"]>
+  export type TurmaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    professor?: boolean | ProfessorDefaultArgs<ExtArgs>
+    alunos?: boolean | Turma$alunosArgs<ExtArgs>
+    _count?: boolean | TurmaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TurmaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    professor?: boolean | ProfessorDefaultArgs<ExtArgs>
+  }
+  export type TurmaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    professor?: boolean | ProfessorDefaultArgs<ExtArgs>
+  }
+
+  export type $TurmaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Turma"
+    objects: {
+      professor: Prisma.$ProfessorPayload<ExtArgs>
+      alunos: Prisma.$AlunoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nome: string
+      professorId: number
+    }, ExtArgs["result"]["turma"]>
+    composites: {}
+  }
+
+  type TurmaGetPayload<S extends boolean | null | undefined | TurmaDefaultArgs> = $Result.GetResult<Prisma.$TurmaPayload, S>
+
+  type TurmaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TurmaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TurmaCountAggregateInputType | true
+    }
+
+  export interface TurmaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Turma'], meta: { name: 'Turma' } }
+    /**
+     * Find zero or one Turma that matches the filter.
+     * @param {TurmaFindUniqueArgs} args - Arguments to find a Turma
+     * @example
+     * // Get one Turma
+     * const turma = await prisma.turma.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TurmaFindUniqueArgs>(args: SelectSubset<T, TurmaFindUniqueArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Turma that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TurmaFindUniqueOrThrowArgs} args - Arguments to find a Turma
+     * @example
+     * // Get one Turma
+     * const turma = await prisma.turma.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TurmaFindUniqueOrThrowArgs>(args: SelectSubset<T, TurmaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Turma that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaFindFirstArgs} args - Arguments to find a Turma
+     * @example
+     * // Get one Turma
+     * const turma = await prisma.turma.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TurmaFindFirstArgs>(args?: SelectSubset<T, TurmaFindFirstArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Turma that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaFindFirstOrThrowArgs} args - Arguments to find a Turma
+     * @example
+     * // Get one Turma
+     * const turma = await prisma.turma.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TurmaFindFirstOrThrowArgs>(args?: SelectSubset<T, TurmaFindFirstOrThrowArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Turmas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Turmas
+     * const turmas = await prisma.turma.findMany()
+     * 
+     * // Get first 10 Turmas
+     * const turmas = await prisma.turma.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const turmaWithIdOnly = await prisma.turma.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TurmaFindManyArgs>(args?: SelectSubset<T, TurmaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Turma.
+     * @param {TurmaCreateArgs} args - Arguments to create a Turma.
+     * @example
+     * // Create one Turma
+     * const Turma = await prisma.turma.create({
+     *   data: {
+     *     // ... data to create a Turma
+     *   }
+     * })
+     * 
+     */
+    create<T extends TurmaCreateArgs>(args: SelectSubset<T, TurmaCreateArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Turmas.
+     * @param {TurmaCreateManyArgs} args - Arguments to create many Turmas.
+     * @example
+     * // Create many Turmas
+     * const turma = await prisma.turma.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TurmaCreateManyArgs>(args?: SelectSubset<T, TurmaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Turmas and returns the data saved in the database.
+     * @param {TurmaCreateManyAndReturnArgs} args - Arguments to create many Turmas.
+     * @example
+     * // Create many Turmas
+     * const turma = await prisma.turma.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Turmas and only return the `id`
+     * const turmaWithIdOnly = await prisma.turma.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TurmaCreateManyAndReturnArgs>(args?: SelectSubset<T, TurmaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Turma.
+     * @param {TurmaDeleteArgs} args - Arguments to delete one Turma.
+     * @example
+     * // Delete one Turma
+     * const Turma = await prisma.turma.delete({
+     *   where: {
+     *     // ... filter to delete one Turma
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TurmaDeleteArgs>(args: SelectSubset<T, TurmaDeleteArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Turma.
+     * @param {TurmaUpdateArgs} args - Arguments to update one Turma.
+     * @example
+     * // Update one Turma
+     * const turma = await prisma.turma.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TurmaUpdateArgs>(args: SelectSubset<T, TurmaUpdateArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Turmas.
+     * @param {TurmaDeleteManyArgs} args - Arguments to filter Turmas to delete.
+     * @example
+     * // Delete a few Turmas
+     * const { count } = await prisma.turma.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TurmaDeleteManyArgs>(args?: SelectSubset<T, TurmaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Turmas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Turmas
+     * const turma = await prisma.turma.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TurmaUpdateManyArgs>(args: SelectSubset<T, TurmaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Turmas and returns the data updated in the database.
+     * @param {TurmaUpdateManyAndReturnArgs} args - Arguments to update many Turmas.
+     * @example
+     * // Update many Turmas
+     * const turma = await prisma.turma.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Turmas and only return the `id`
+     * const turmaWithIdOnly = await prisma.turma.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TurmaUpdateManyAndReturnArgs>(args: SelectSubset<T, TurmaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Turma.
+     * @param {TurmaUpsertArgs} args - Arguments to update or create a Turma.
+     * @example
+     * // Update or create a Turma
+     * const turma = await prisma.turma.upsert({
+     *   create: {
+     *     // ... data to create a Turma
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Turma we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TurmaUpsertArgs>(args: SelectSubset<T, TurmaUpsertArgs<ExtArgs>>): Prisma__TurmaClient<$Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Turmas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaCountArgs} args - Arguments to filter Turmas to count.
+     * @example
+     * // Count the number of Turmas
+     * const count = await prisma.turma.count({
+     *   where: {
+     *     // ... the filter for the Turmas we want to count
+     *   }
+     * })
+    **/
+    count<T extends TurmaCountArgs>(
+      args?: Subset<T, TurmaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TurmaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Turma.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TurmaAggregateArgs>(args: Subset<T, TurmaAggregateArgs>): Prisma.PrismaPromise<GetTurmaAggregateType<T>>
+
+    /**
+     * Group by Turma.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurmaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TurmaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TurmaGroupByArgs['orderBy'] }
+        : { orderBy?: TurmaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TurmaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTurmaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Turma model
+   */
+  readonly fields: TurmaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Turma.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TurmaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    professor<T extends ProfessorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfessorDefaultArgs<ExtArgs>>): Prisma__ProfessorClient<$Result.GetResult<Prisma.$ProfessorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    alunos<T extends Turma$alunosArgs<ExtArgs> = {}>(args?: Subset<T, Turma$alunosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Turma model
+   */
+  interface TurmaFieldRefs {
+    readonly id: FieldRef<"Turma", 'Int'>
+    readonly nome: FieldRef<"Turma", 'String'>
+    readonly professorId: FieldRef<"Turma", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Turma findUnique
+   */
+  export type TurmaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * Filter, which Turma to fetch.
+     */
+    where: TurmaWhereUniqueInput
+  }
+
+  /**
+   * Turma findUniqueOrThrow
+   */
+  export type TurmaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * Filter, which Turma to fetch.
+     */
+    where: TurmaWhereUniqueInput
+  }
+
+  /**
+   * Turma findFirst
+   */
+  export type TurmaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * Filter, which Turma to fetch.
+     */
+    where?: TurmaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Turmas to fetch.
+     */
+    orderBy?: TurmaOrderByWithRelationInput | TurmaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Turmas.
+     */
+    cursor?: TurmaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Turmas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Turmas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Turmas.
+     */
+    distinct?: TurmaScalarFieldEnum | TurmaScalarFieldEnum[]
+  }
+
+  /**
+   * Turma findFirstOrThrow
+   */
+  export type TurmaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * Filter, which Turma to fetch.
+     */
+    where?: TurmaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Turmas to fetch.
+     */
+    orderBy?: TurmaOrderByWithRelationInput | TurmaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Turmas.
+     */
+    cursor?: TurmaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Turmas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Turmas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Turmas.
+     */
+    distinct?: TurmaScalarFieldEnum | TurmaScalarFieldEnum[]
+  }
+
+  /**
+   * Turma findMany
+   */
+  export type TurmaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * Filter, which Turmas to fetch.
+     */
+    where?: TurmaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Turmas to fetch.
+     */
+    orderBy?: TurmaOrderByWithRelationInput | TurmaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Turmas.
+     */
+    cursor?: TurmaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Turmas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Turmas.
+     */
+    skip?: number
+    distinct?: TurmaScalarFieldEnum | TurmaScalarFieldEnum[]
+  }
+
+  /**
+   * Turma create
+   */
+  export type TurmaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Turma.
+     */
+    data: XOR<TurmaCreateInput, TurmaUncheckedCreateInput>
+  }
+
+  /**
+   * Turma createMany
+   */
+  export type TurmaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Turmas.
+     */
+    data: TurmaCreateManyInput | TurmaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Turma createManyAndReturn
+   */
+  export type TurmaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Turmas.
+     */
+    data: TurmaCreateManyInput | TurmaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Turma update
+   */
+  export type TurmaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Turma.
+     */
+    data: XOR<TurmaUpdateInput, TurmaUncheckedUpdateInput>
+    /**
+     * Choose, which Turma to update.
+     */
+    where: TurmaWhereUniqueInput
+  }
+
+  /**
+   * Turma updateMany
+   */
+  export type TurmaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Turmas.
+     */
+    data: XOR<TurmaUpdateManyMutationInput, TurmaUncheckedUpdateManyInput>
+    /**
+     * Filter which Turmas to update
+     */
+    where?: TurmaWhereInput
+    /**
+     * Limit how many Turmas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Turma updateManyAndReturn
+   */
+  export type TurmaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * The data used to update Turmas.
+     */
+    data: XOR<TurmaUpdateManyMutationInput, TurmaUncheckedUpdateManyInput>
+    /**
+     * Filter which Turmas to update
+     */
+    where?: TurmaWhereInput
+    /**
+     * Limit how many Turmas to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Turma upsert
+   */
+  export type TurmaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Turma to update in case it exists.
+     */
+    where: TurmaWhereUniqueInput
+    /**
+     * In case the Turma found by the `where` argument doesn't exist, create a new Turma with this data.
+     */
+    create: XOR<TurmaCreateInput, TurmaUncheckedCreateInput>
+    /**
+     * In case the Turma was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TurmaUpdateInput, TurmaUncheckedUpdateInput>
+  }
+
+  /**
+   * Turma delete
+   */
+  export type TurmaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+    /**
+     * Filter which Turma to delete.
+     */
+    where: TurmaWhereUniqueInput
+  }
+
+  /**
+   * Turma deleteMany
+   */
+  export type TurmaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Turmas to delete
+     */
+    where?: TurmaWhereInput
+    /**
+     * Limit how many Turmas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Turma.alunos
+   */
+  export type Turma$alunosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aluno
+     */
+    select?: AlunoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Aluno
+     */
+    omit?: AlunoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AlunoInclude<ExtArgs> | null
+    where?: AlunoWhereInput
+    orderBy?: AlunoOrderByWithRelationInput | AlunoOrderByWithRelationInput[]
+    cursor?: AlunoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AlunoScalarFieldEnum | AlunoScalarFieldEnum[]
+  }
+
+  /**
+   * Turma without action
+   */
+  export type TurmaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Turma
+     */
+    select?: TurmaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Turma
+     */
+    omit?: TurmaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurmaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Enums
+   */
+
+  export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  };
+
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const ProfessorScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    email: 'email'
+  };
+
+  export type ProfessorScalarFieldEnum = (typeof ProfessorScalarFieldEnum)[keyof typeof ProfessorScalarFieldEnum]
+
+
+  export const AlunoScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    matricula: 'matricula'
+  };
+
+  export type AlunoScalarFieldEnum = (typeof AlunoScalarFieldEnum)[keyof typeof AlunoScalarFieldEnum]
+
+
+  export const TurmaScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    professorId: 'professorId'
+  };
+
+  export type TurmaScalarFieldEnum = (typeof TurmaScalarFieldEnum)[keyof typeof TurmaScalarFieldEnum]
+
+
+  export const SortOrder: {
+    asc: 'asc',
+    desc: 'desc'
+  };
+
+  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  /**
+   * Field references
+   */
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+  /**
+   * Deep Input Types
+   */
+
+
+  export type ProfessorWhereInput = {
+    AND?: ProfessorWhereInput | ProfessorWhereInput[]
+    OR?: ProfessorWhereInput[]
+    NOT?: ProfessorWhereInput | ProfessorWhereInput[]
+    id?: IntFilter<"Professor"> | number
+    nome?: StringFilter<"Professor"> | string
+    email?: StringFilter<"Professor"> | string
+    turmas?: TurmaListRelationFilter
+  }
+
+  export type ProfessorOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    email?: SortOrder
+    turmas?: TurmaOrderByRelationAggregateInput
+  }
+
+  export type ProfessorWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: ProfessorWhereInput | ProfessorWhereInput[]
+    OR?: ProfessorWhereInput[]
+    NOT?: ProfessorWhereInput | ProfessorWhereInput[]
+    nome?: StringFilter<"Professor"> | string
+    turmas?: TurmaListRelationFilter
+  }, "id" | "email">
+
+  export type ProfessorOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    email?: SortOrder
+    _count?: ProfessorCountOrderByAggregateInput
+    _avg?: ProfessorAvgOrderByAggregateInput
+    _max?: ProfessorMaxOrderByAggregateInput
+    _min?: ProfessorMinOrderByAggregateInput
+    _sum?: ProfessorSumOrderByAggregateInput
+  }
+
+  export type ProfessorScalarWhereWithAggregatesInput = {
+    AND?: ProfessorScalarWhereWithAggregatesInput | ProfessorScalarWhereWithAggregatesInput[]
+    OR?: ProfessorScalarWhereWithAggregatesInput[]
+    NOT?: ProfessorScalarWhereWithAggregatesInput | ProfessorScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Professor"> | number
+    nome?: StringWithAggregatesFilter<"Professor"> | string
+    email?: StringWithAggregatesFilter<"Professor"> | string
+  }
+
+  export type AlunoWhereInput = {
+    AND?: AlunoWhereInput | AlunoWhereInput[]
+    OR?: AlunoWhereInput[]
+    NOT?: AlunoWhereInput | AlunoWhereInput[]
+    id?: IntFilter<"Aluno"> | number
+    nome?: StringFilter<"Aluno"> | string
+    matricula?: StringFilter<"Aluno"> | string
+    turmas?: TurmaListRelationFilter
+  }
+
+  export type AlunoOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    matricula?: SortOrder
+    turmas?: TurmaOrderByRelationAggregateInput
+  }
+
+  export type AlunoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    matricula?: string
+    AND?: AlunoWhereInput | AlunoWhereInput[]
+    OR?: AlunoWhereInput[]
+    NOT?: AlunoWhereInput | AlunoWhereInput[]
+    nome?: StringFilter<"Aluno"> | string
+    turmas?: TurmaListRelationFilter
+  }, "id" | "matricula">
+
+  export type AlunoOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    matricula?: SortOrder
+    _count?: AlunoCountOrderByAggregateInput
+    _avg?: AlunoAvgOrderByAggregateInput
+    _max?: AlunoMaxOrderByAggregateInput
+    _min?: AlunoMinOrderByAggregateInput
+    _sum?: AlunoSumOrderByAggregateInput
+  }
+
+  export type AlunoScalarWhereWithAggregatesInput = {
+    AND?: AlunoScalarWhereWithAggregatesInput | AlunoScalarWhereWithAggregatesInput[]
+    OR?: AlunoScalarWhereWithAggregatesInput[]
+    NOT?: AlunoScalarWhereWithAggregatesInput | AlunoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Aluno"> | number
+    nome?: StringWithAggregatesFilter<"Aluno"> | string
+    matricula?: StringWithAggregatesFilter<"Aluno"> | string
+  }
+
+  export type TurmaWhereInput = {
+    AND?: TurmaWhereInput | TurmaWhereInput[]
+    OR?: TurmaWhereInput[]
+    NOT?: TurmaWhereInput | TurmaWhereInput[]
+    id?: IntFilter<"Turma"> | number
+    nome?: StringFilter<"Turma"> | string
+    professorId?: IntFilter<"Turma"> | number
+    professor?: XOR<ProfessorScalarRelationFilter, ProfessorWhereInput>
+    alunos?: AlunoListRelationFilter
+  }
+
+  export type TurmaOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    professorId?: SortOrder
+    professor?: ProfessorOrderByWithRelationInput
+    alunos?: AlunoOrderByRelationAggregateInput
+  }
+
+  export type TurmaWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: TurmaWhereInput | TurmaWhereInput[]
+    OR?: TurmaWhereInput[]
+    NOT?: TurmaWhereInput | TurmaWhereInput[]
+    nome?: StringFilter<"Turma"> | string
+    professorId?: IntFilter<"Turma"> | number
+    professor?: XOR<ProfessorScalarRelationFilter, ProfessorWhereInput>
+    alunos?: AlunoListRelationFilter
+  }, "id">
+
+  export type TurmaOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    professorId?: SortOrder
+    _count?: TurmaCountOrderByAggregateInput
+    _avg?: TurmaAvgOrderByAggregateInput
+    _max?: TurmaMaxOrderByAggregateInput
+    _min?: TurmaMinOrderByAggregateInput
+    _sum?: TurmaSumOrderByAggregateInput
+  }
+
+  export type TurmaScalarWhereWithAggregatesInput = {
+    AND?: TurmaScalarWhereWithAggregatesInput | TurmaScalarWhereWithAggregatesInput[]
+    OR?: TurmaScalarWhereWithAggregatesInput[]
+    NOT?: TurmaScalarWhereWithAggregatesInput | TurmaScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Turma"> | number
+    nome?: StringWithAggregatesFilter<"Turma"> | string
+    professorId?: IntWithAggregatesFilter<"Turma"> | number
+  }
+
+  export type ProfessorCreateInput = {
+    nome: string
+    email: string
+    turmas?: TurmaCreateNestedManyWithoutProfessorInput
+  }
+
+  export type ProfessorUncheckedCreateInput = {
+    id?: number
+    nome: string
+    email: string
+    turmas?: TurmaUncheckedCreateNestedManyWithoutProfessorInput
+  }
+
+  export type ProfessorUpdateInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    turmas?: TurmaUpdateManyWithoutProfessorNestedInput
+  }
+
+  export type ProfessorUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    turmas?: TurmaUncheckedUpdateManyWithoutProfessorNestedInput
+  }
+
+  export type ProfessorCreateManyInput = {
+    id?: number
+    nome: string
+    email: string
+  }
+
+  export type ProfessorUpdateManyMutationInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProfessorUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AlunoCreateInput = {
+    nome: string
+    matricula: string
+    turmas?: TurmaCreateNestedManyWithoutAlunosInput
+  }
+
+  export type AlunoUncheckedCreateInput = {
+    id?: number
+    nome: string
+    matricula: string
+    turmas?: TurmaUncheckedCreateNestedManyWithoutAlunosInput
+  }
+
+  export type AlunoUpdateInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+    turmas?: TurmaUpdateManyWithoutAlunosNestedInput
+  }
+
+  export type AlunoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+    turmas?: TurmaUncheckedUpdateManyWithoutAlunosNestedInput
+  }
+
+  export type AlunoCreateManyInput = {
+    id?: number
+    nome: string
+    matricula: string
+  }
+
+  export type AlunoUpdateManyMutationInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AlunoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TurmaCreateInput = {
+    nome: string
+    professor: ProfessorCreateNestedOneWithoutTurmasInput
+    alunos?: AlunoCreateNestedManyWithoutTurmasInput
+  }
+
+  export type TurmaUncheckedCreateInput = {
+    id?: number
+    nome: string
+    professorId: number
+    alunos?: AlunoUncheckedCreateNestedManyWithoutTurmasInput
+  }
+
+  export type TurmaUpdateInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    professor?: ProfessorUpdateOneRequiredWithoutTurmasNestedInput
+    alunos?: AlunoUpdateManyWithoutTurmasNestedInput
+  }
+
+  export type TurmaUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    professorId?: IntFieldUpdateOperationsInput | number
+    alunos?: AlunoUncheckedUpdateManyWithoutTurmasNestedInput
+  }
+
+  export type TurmaCreateManyInput = {
+    id?: number
+    nome: string
+    professorId: number
+  }
+
+  export type TurmaUpdateManyMutationInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TurmaUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    professorId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type TurmaListRelationFilter = {
+    every?: TurmaWhereInput
+    some?: TurmaWhereInput
+    none?: TurmaWhereInput
+  }
+
+  export type TurmaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProfessorCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    email?: SortOrder
+  }
+
+  export type ProfessorAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ProfessorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    email?: SortOrder
+  }
+
+  export type ProfessorMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    email?: SortOrder
+  }
+
+  export type ProfessorSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type AlunoCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    matricula?: SortOrder
+  }
+
+  export type AlunoAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AlunoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    matricula?: SortOrder
+  }
+
+  export type AlunoMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    matricula?: SortOrder
+  }
+
+  export type AlunoSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ProfessorScalarRelationFilter = {
+    is?: ProfessorWhereInput
+    isNot?: ProfessorWhereInput
+  }
+
+  export type AlunoListRelationFilter = {
+    every?: AlunoWhereInput
+    some?: AlunoWhereInput
+    none?: AlunoWhereInput
+  }
+
+  export type AlunoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TurmaCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    professorId?: SortOrder
+  }
+
+  export type TurmaAvgOrderByAggregateInput = {
+    id?: SortOrder
+    professorId?: SortOrder
+  }
+
+  export type TurmaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    professorId?: SortOrder
+  }
+
+  export type TurmaMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    professorId?: SortOrder
+  }
+
+  export type TurmaSumOrderByAggregateInput = {
+    id?: SortOrder
+    professorId?: SortOrder
+  }
+
+  export type TurmaCreateNestedManyWithoutProfessorInput = {
+    create?: XOR<TurmaCreateWithoutProfessorInput, TurmaUncheckedCreateWithoutProfessorInput> | TurmaCreateWithoutProfessorInput[] | TurmaUncheckedCreateWithoutProfessorInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutProfessorInput | TurmaCreateOrConnectWithoutProfessorInput[]
+    createMany?: TurmaCreateManyProfessorInputEnvelope
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+  }
+
+  export type TurmaUncheckedCreateNestedManyWithoutProfessorInput = {
+    create?: XOR<TurmaCreateWithoutProfessorInput, TurmaUncheckedCreateWithoutProfessorInput> | TurmaCreateWithoutProfessorInput[] | TurmaUncheckedCreateWithoutProfessorInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutProfessorInput | TurmaCreateOrConnectWithoutProfessorInput[]
+    createMany?: TurmaCreateManyProfessorInputEnvelope
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type TurmaUpdateManyWithoutProfessorNestedInput = {
+    create?: XOR<TurmaCreateWithoutProfessorInput, TurmaUncheckedCreateWithoutProfessorInput> | TurmaCreateWithoutProfessorInput[] | TurmaUncheckedCreateWithoutProfessorInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutProfessorInput | TurmaCreateOrConnectWithoutProfessorInput[]
+    upsert?: TurmaUpsertWithWhereUniqueWithoutProfessorInput | TurmaUpsertWithWhereUniqueWithoutProfessorInput[]
+    createMany?: TurmaCreateManyProfessorInputEnvelope
+    set?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    disconnect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    delete?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    update?: TurmaUpdateWithWhereUniqueWithoutProfessorInput | TurmaUpdateWithWhereUniqueWithoutProfessorInput[]
+    updateMany?: TurmaUpdateManyWithWhereWithoutProfessorInput | TurmaUpdateManyWithWhereWithoutProfessorInput[]
+    deleteMany?: TurmaScalarWhereInput | TurmaScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TurmaUncheckedUpdateManyWithoutProfessorNestedInput = {
+    create?: XOR<TurmaCreateWithoutProfessorInput, TurmaUncheckedCreateWithoutProfessorInput> | TurmaCreateWithoutProfessorInput[] | TurmaUncheckedCreateWithoutProfessorInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutProfessorInput | TurmaCreateOrConnectWithoutProfessorInput[]
+    upsert?: TurmaUpsertWithWhereUniqueWithoutProfessorInput | TurmaUpsertWithWhereUniqueWithoutProfessorInput[]
+    createMany?: TurmaCreateManyProfessorInputEnvelope
+    set?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    disconnect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    delete?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    update?: TurmaUpdateWithWhereUniqueWithoutProfessorInput | TurmaUpdateWithWhereUniqueWithoutProfessorInput[]
+    updateMany?: TurmaUpdateManyWithWhereWithoutProfessorInput | TurmaUpdateManyWithWhereWithoutProfessorInput[]
+    deleteMany?: TurmaScalarWhereInput | TurmaScalarWhereInput[]
+  }
+
+  export type TurmaCreateNestedManyWithoutAlunosInput = {
+    create?: XOR<TurmaCreateWithoutAlunosInput, TurmaUncheckedCreateWithoutAlunosInput> | TurmaCreateWithoutAlunosInput[] | TurmaUncheckedCreateWithoutAlunosInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutAlunosInput | TurmaCreateOrConnectWithoutAlunosInput[]
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+  }
+
+  export type TurmaUncheckedCreateNestedManyWithoutAlunosInput = {
+    create?: XOR<TurmaCreateWithoutAlunosInput, TurmaUncheckedCreateWithoutAlunosInput> | TurmaCreateWithoutAlunosInput[] | TurmaUncheckedCreateWithoutAlunosInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutAlunosInput | TurmaCreateOrConnectWithoutAlunosInput[]
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+  }
+
+  export type TurmaUpdateManyWithoutAlunosNestedInput = {
+    create?: XOR<TurmaCreateWithoutAlunosInput, TurmaUncheckedCreateWithoutAlunosInput> | TurmaCreateWithoutAlunosInput[] | TurmaUncheckedCreateWithoutAlunosInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutAlunosInput | TurmaCreateOrConnectWithoutAlunosInput[]
+    upsert?: TurmaUpsertWithWhereUniqueWithoutAlunosInput | TurmaUpsertWithWhereUniqueWithoutAlunosInput[]
+    set?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    disconnect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    delete?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    update?: TurmaUpdateWithWhereUniqueWithoutAlunosInput | TurmaUpdateWithWhereUniqueWithoutAlunosInput[]
+    updateMany?: TurmaUpdateManyWithWhereWithoutAlunosInput | TurmaUpdateManyWithWhereWithoutAlunosInput[]
+    deleteMany?: TurmaScalarWhereInput | TurmaScalarWhereInput[]
+  }
+
+  export type TurmaUncheckedUpdateManyWithoutAlunosNestedInput = {
+    create?: XOR<TurmaCreateWithoutAlunosInput, TurmaUncheckedCreateWithoutAlunosInput> | TurmaCreateWithoutAlunosInput[] | TurmaUncheckedCreateWithoutAlunosInput[]
+    connectOrCreate?: TurmaCreateOrConnectWithoutAlunosInput | TurmaCreateOrConnectWithoutAlunosInput[]
+    upsert?: TurmaUpsertWithWhereUniqueWithoutAlunosInput | TurmaUpsertWithWhereUniqueWithoutAlunosInput[]
+    set?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    disconnect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    delete?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    connect?: TurmaWhereUniqueInput | TurmaWhereUniqueInput[]
+    update?: TurmaUpdateWithWhereUniqueWithoutAlunosInput | TurmaUpdateWithWhereUniqueWithoutAlunosInput[]
+    updateMany?: TurmaUpdateManyWithWhereWithoutAlunosInput | TurmaUpdateManyWithWhereWithoutAlunosInput[]
+    deleteMany?: TurmaScalarWhereInput | TurmaScalarWhereInput[]
+  }
+
+  export type ProfessorCreateNestedOneWithoutTurmasInput = {
+    create?: XOR<ProfessorCreateWithoutTurmasInput, ProfessorUncheckedCreateWithoutTurmasInput>
+    connectOrCreate?: ProfessorCreateOrConnectWithoutTurmasInput
+    connect?: ProfessorWhereUniqueInput
+  }
+
+  export type AlunoCreateNestedManyWithoutTurmasInput = {
+    create?: XOR<AlunoCreateWithoutTurmasInput, AlunoUncheckedCreateWithoutTurmasInput> | AlunoCreateWithoutTurmasInput[] | AlunoUncheckedCreateWithoutTurmasInput[]
+    connectOrCreate?: AlunoCreateOrConnectWithoutTurmasInput | AlunoCreateOrConnectWithoutTurmasInput[]
+    connect?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+  }
+
+  export type AlunoUncheckedCreateNestedManyWithoutTurmasInput = {
+    create?: XOR<AlunoCreateWithoutTurmasInput, AlunoUncheckedCreateWithoutTurmasInput> | AlunoCreateWithoutTurmasInput[] | AlunoUncheckedCreateWithoutTurmasInput[]
+    connectOrCreate?: AlunoCreateOrConnectWithoutTurmasInput | AlunoCreateOrConnectWithoutTurmasInput[]
+    connect?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+  }
+
+  export type ProfessorUpdateOneRequiredWithoutTurmasNestedInput = {
+    create?: XOR<ProfessorCreateWithoutTurmasInput, ProfessorUncheckedCreateWithoutTurmasInput>
+    connectOrCreate?: ProfessorCreateOrConnectWithoutTurmasInput
+    upsert?: ProfessorUpsertWithoutTurmasInput
+    connect?: ProfessorWhereUniqueInput
+    update?: XOR<XOR<ProfessorUpdateToOneWithWhereWithoutTurmasInput, ProfessorUpdateWithoutTurmasInput>, ProfessorUncheckedUpdateWithoutTurmasInput>
+  }
+
+  export type AlunoUpdateManyWithoutTurmasNestedInput = {
+    create?: XOR<AlunoCreateWithoutTurmasInput, AlunoUncheckedCreateWithoutTurmasInput> | AlunoCreateWithoutTurmasInput[] | AlunoUncheckedCreateWithoutTurmasInput[]
+    connectOrCreate?: AlunoCreateOrConnectWithoutTurmasInput | AlunoCreateOrConnectWithoutTurmasInput[]
+    upsert?: AlunoUpsertWithWhereUniqueWithoutTurmasInput | AlunoUpsertWithWhereUniqueWithoutTurmasInput[]
+    set?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    disconnect?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    delete?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    connect?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    update?: AlunoUpdateWithWhereUniqueWithoutTurmasInput | AlunoUpdateWithWhereUniqueWithoutTurmasInput[]
+    updateMany?: AlunoUpdateManyWithWhereWithoutTurmasInput | AlunoUpdateManyWithWhereWithoutTurmasInput[]
+    deleteMany?: AlunoScalarWhereInput | AlunoScalarWhereInput[]
+  }
+
+  export type AlunoUncheckedUpdateManyWithoutTurmasNestedInput = {
+    create?: XOR<AlunoCreateWithoutTurmasInput, AlunoUncheckedCreateWithoutTurmasInput> | AlunoCreateWithoutTurmasInput[] | AlunoUncheckedCreateWithoutTurmasInput[]
+    connectOrCreate?: AlunoCreateOrConnectWithoutTurmasInput | AlunoCreateOrConnectWithoutTurmasInput[]
+    upsert?: AlunoUpsertWithWhereUniqueWithoutTurmasInput | AlunoUpsertWithWhereUniqueWithoutTurmasInput[]
+    set?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    disconnect?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    delete?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    connect?: AlunoWhereUniqueInput | AlunoWhereUniqueInput[]
+    update?: AlunoUpdateWithWhereUniqueWithoutTurmasInput | AlunoUpdateWithWhereUniqueWithoutTurmasInput[]
+    updateMany?: AlunoUpdateManyWithWhereWithoutTurmasInput | AlunoUpdateManyWithWhereWithoutTurmasInput[]
+    deleteMany?: AlunoScalarWhereInput | AlunoScalarWhereInput[]
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type TurmaCreateWithoutProfessorInput = {
+    nome: string
+    alunos?: AlunoCreateNestedManyWithoutTurmasInput
+  }
+
+  export type TurmaUncheckedCreateWithoutProfessorInput = {
+    id?: number
+    nome: string
+    alunos?: AlunoUncheckedCreateNestedManyWithoutTurmasInput
+  }
+
+  export type TurmaCreateOrConnectWithoutProfessorInput = {
+    where: TurmaWhereUniqueInput
+    create: XOR<TurmaCreateWithoutProfessorInput, TurmaUncheckedCreateWithoutProfessorInput>
+  }
+
+  export type TurmaCreateManyProfessorInputEnvelope = {
+    data: TurmaCreateManyProfessorInput | TurmaCreateManyProfessorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TurmaUpsertWithWhereUniqueWithoutProfessorInput = {
+    where: TurmaWhereUniqueInput
+    update: XOR<TurmaUpdateWithoutProfessorInput, TurmaUncheckedUpdateWithoutProfessorInput>
+    create: XOR<TurmaCreateWithoutProfessorInput, TurmaUncheckedCreateWithoutProfessorInput>
+  }
+
+  export type TurmaUpdateWithWhereUniqueWithoutProfessorInput = {
+    where: TurmaWhereUniqueInput
+    data: XOR<TurmaUpdateWithoutProfessorInput, TurmaUncheckedUpdateWithoutProfessorInput>
+  }
+
+  export type TurmaUpdateManyWithWhereWithoutProfessorInput = {
+    where: TurmaScalarWhereInput
+    data: XOR<TurmaUpdateManyMutationInput, TurmaUncheckedUpdateManyWithoutProfessorInput>
+  }
+
+  export type TurmaScalarWhereInput = {
+    AND?: TurmaScalarWhereInput | TurmaScalarWhereInput[]
+    OR?: TurmaScalarWhereInput[]
+    NOT?: TurmaScalarWhereInput | TurmaScalarWhereInput[]
+    id?: IntFilter<"Turma"> | number
+    nome?: StringFilter<"Turma"> | string
+    professorId?: IntFilter<"Turma"> | number
+  }
+
+  export type TurmaCreateWithoutAlunosInput = {
+    nome: string
+    professor: ProfessorCreateNestedOneWithoutTurmasInput
+  }
+
+  export type TurmaUncheckedCreateWithoutAlunosInput = {
+    id?: number
+    nome: string
+    professorId: number
+  }
+
+  export type TurmaCreateOrConnectWithoutAlunosInput = {
+    where: TurmaWhereUniqueInput
+    create: XOR<TurmaCreateWithoutAlunosInput, TurmaUncheckedCreateWithoutAlunosInput>
+  }
+
+  export type TurmaUpsertWithWhereUniqueWithoutAlunosInput = {
+    where: TurmaWhereUniqueInput
+    update: XOR<TurmaUpdateWithoutAlunosInput, TurmaUncheckedUpdateWithoutAlunosInput>
+    create: XOR<TurmaCreateWithoutAlunosInput, TurmaUncheckedCreateWithoutAlunosInput>
+  }
+
+  export type TurmaUpdateWithWhereUniqueWithoutAlunosInput = {
+    where: TurmaWhereUniqueInput
+    data: XOR<TurmaUpdateWithoutAlunosInput, TurmaUncheckedUpdateWithoutAlunosInput>
+  }
+
+  export type TurmaUpdateManyWithWhereWithoutAlunosInput = {
+    where: TurmaScalarWhereInput
+    data: XOR<TurmaUpdateManyMutationInput, TurmaUncheckedUpdateManyWithoutAlunosInput>
+  }
+
+  export type ProfessorCreateWithoutTurmasInput = {
+    nome: string
+    email: string
+  }
+
+  export type ProfessorUncheckedCreateWithoutTurmasInput = {
+    id?: number
+    nome: string
+    email: string
+  }
+
+  export type ProfessorCreateOrConnectWithoutTurmasInput = {
+    where: ProfessorWhereUniqueInput
+    create: XOR<ProfessorCreateWithoutTurmasInput, ProfessorUncheckedCreateWithoutTurmasInput>
+  }
+
+  export type AlunoCreateWithoutTurmasInput = {
+    nome: string
+    matricula: string
+  }
+
+  export type AlunoUncheckedCreateWithoutTurmasInput = {
+    id?: number
+    nome: string
+    matricula: string
+  }
+
+  export type AlunoCreateOrConnectWithoutTurmasInput = {
+    where: AlunoWhereUniqueInput
+    create: XOR<AlunoCreateWithoutTurmasInput, AlunoUncheckedCreateWithoutTurmasInput>
+  }
+
+  export type ProfessorUpsertWithoutTurmasInput = {
+    update: XOR<ProfessorUpdateWithoutTurmasInput, ProfessorUncheckedUpdateWithoutTurmasInput>
+    create: XOR<ProfessorCreateWithoutTurmasInput, ProfessorUncheckedCreateWithoutTurmasInput>
+    where?: ProfessorWhereInput
+  }
+
+  export type ProfessorUpdateToOneWithWhereWithoutTurmasInput = {
+    where?: ProfessorWhereInput
+    data: XOR<ProfessorUpdateWithoutTurmasInput, ProfessorUncheckedUpdateWithoutTurmasInput>
+  }
+
+  export type ProfessorUpdateWithoutTurmasInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProfessorUncheckedUpdateWithoutTurmasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AlunoUpsertWithWhereUniqueWithoutTurmasInput = {
+    where: AlunoWhereUniqueInput
+    update: XOR<AlunoUpdateWithoutTurmasInput, AlunoUncheckedUpdateWithoutTurmasInput>
+    create: XOR<AlunoCreateWithoutTurmasInput, AlunoUncheckedCreateWithoutTurmasInput>
+  }
+
+  export type AlunoUpdateWithWhereUniqueWithoutTurmasInput = {
+    where: AlunoWhereUniqueInput
+    data: XOR<AlunoUpdateWithoutTurmasInput, AlunoUncheckedUpdateWithoutTurmasInput>
+  }
+
+  export type AlunoUpdateManyWithWhereWithoutTurmasInput = {
+    where: AlunoScalarWhereInput
+    data: XOR<AlunoUpdateManyMutationInput, AlunoUncheckedUpdateManyWithoutTurmasInput>
+  }
+
+  export type AlunoScalarWhereInput = {
+    AND?: AlunoScalarWhereInput | AlunoScalarWhereInput[]
+    OR?: AlunoScalarWhereInput[]
+    NOT?: AlunoScalarWhereInput | AlunoScalarWhereInput[]
+    id?: IntFilter<"Aluno"> | number
+    nome?: StringFilter<"Aluno"> | string
+    matricula?: StringFilter<"Aluno"> | string
+  }
+
+  export type TurmaCreateManyProfessorInput = {
+    id?: number
+    nome: string
+  }
+
+  export type TurmaUpdateWithoutProfessorInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    alunos?: AlunoUpdateManyWithoutTurmasNestedInput
+  }
+
+  export type TurmaUncheckedUpdateWithoutProfessorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    alunos?: AlunoUncheckedUpdateManyWithoutTurmasNestedInput
+  }
+
+  export type TurmaUncheckedUpdateManyWithoutProfessorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TurmaUpdateWithoutAlunosInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    professor?: ProfessorUpdateOneRequiredWithoutTurmasNestedInput
+  }
+
+  export type TurmaUncheckedUpdateWithoutAlunosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    professorId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TurmaUncheckedUpdateManyWithoutAlunosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    professorId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AlunoUpdateWithoutTurmasInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AlunoUncheckedUpdateWithoutTurmasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AlunoUncheckedUpdateManyWithoutTurmasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    matricula?: StringFieldUpdateOperationsInput | string
+  }
+
+
+
+  /**
+   * Batch Payload for updateMany & deleteMany & createMany
+   */
+
+  export type BatchPayload = {
+    count: number
+  }
+
+  /**
+   * DMMF
+   */
+  export const dmmf: runtime.BaseDMMF
+}
