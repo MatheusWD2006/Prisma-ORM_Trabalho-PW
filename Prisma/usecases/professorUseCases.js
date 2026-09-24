@@ -5,6 +5,7 @@ const getProfessoresDB = async () => {
   try {
     return await prisma.professor.findMany({
       orderBy: { nome: "asc" },
+      include: { turmas: true },
     });
   } catch (err) {
     throw "Erro ao listar professores: " + err;
@@ -48,6 +49,7 @@ const getProfessorByIdDB = async (id) => {
   try {
     const resp = await prisma.professor.findUnique({
       where: { id: Number(id) },
+      include: { turmas: true },
     });
     if (resp == null) {
       throw new Error("Professor não encontrado");
