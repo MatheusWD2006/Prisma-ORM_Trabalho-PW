@@ -5,6 +5,7 @@ const getAlunosDB = async () => {
   try {
     return await prisma.aluno.findMany({
       orderBy: { nome: "asc" },
+      include: { turmas: true },
     });
   } catch (err) {
     throw "Erro ao listar Alunos: " + err;
@@ -26,7 +27,7 @@ const updateAlunoDB = async (id, body) => {
   try {
     const { nome, matricula } = body;
     return await prisma.aluno.update({
-      where: { id },
+      where: { id: Number(id) },
       data: { nome, matricula },
     });
   } catch (err) {
@@ -37,7 +38,7 @@ const updateAlunoDB = async (id, body) => {
 const deleteAlunoDB = async (id) => {
   try {
     return await prisma.aluno.delete({
-      where: { id },
+      where: { id: Number(id) },
     });
   } catch (err) {
     throw "Erro ao excluir Aluno: " + err;
@@ -46,12 +47,25 @@ const deleteAlunoDB = async (id) => {
 
 const getAlunoByIdDB = async (id) => {
   try {
-    return await prisma.aluno.findUnique({
-      where: { id },
+    const resp = await prisma.aluno.findUnique({
+      where: { id: Number(id) },
+      include: { turmas: true },
     });
+
+    if (resp == null) {
+      throw new Error("Aluno não encontrado");
+    }
+
+    return resp;
   } catch (err) {
     throw "Erro ao buscar Aluno: " + err;
   }
 };
 
-module.exports = { getAlunosDB, addAlunoDB, updateAlunoDB, deleteAlunoDB, getAlunoByIdDB };
+module.exports = {
+  getAlunosDB,
+  addAlunoDB,
+  updateAlunoDB,
+  deleteAlunoDB,
+  getAlunoByIdDB,
+};

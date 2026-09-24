@@ -8,21 +8,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model professor {
+model Professor {
   id     Int     @id @default(autoincrement())
   nome   String
   email  String  @unique
   turmas Turma[]
 }
 
-model aluno {
+model Aluno {
   id        Int     @id @default(autoincrement())
   nome      String
   matricula String  @unique
   turmas    Turma[]
 }
 
-model turma {
+model Turma {
   id          Int       @id @default(autoincrement())
   nome        String
   professorId Int

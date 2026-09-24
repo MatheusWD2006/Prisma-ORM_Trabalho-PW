@@ -5,6 +5,8 @@ const {
   updateTurmaDB,
   deleteTurmaDB,
   getTurmaByIdDB,
+  matricularAlunoDB,
+  removerAlunoDB,
 } = require("../usecases/turmaUseCases");
 
 const getTurmas = async (request, response) => {
@@ -74,4 +76,52 @@ const getTurmaById = async (request, response) => {
     );
 };
 
-module.exports = { getTurmas, addTurma, updateTurma, deleteTurma, getTurmaById };
+const matricularAluno = async (request, response) => {
+  const turmaId = Number(request.params.id);
+  const { alunoId } = request.body; // Recebe o ID do aluno do Postman
+
+  await matricularAlunoDB(turmaId, alunoId)
+    .then((data) =>
+      response.status(200).json({
+        status: "success",
+        message: "Aluno adicionado à turma",
+        objeto: data,
+      }),
+    )
+    .catch((err) =>
+      response.status(400).json({
+        status: "error",
+        message: err,
+      }),
+    );
+};
+
+const removerAluno = async (request, response) => {
+  const turmaId = Number(request.params.id);
+  const { alunoId } = request.body;
+
+  await removerAlunoDB(turmaId, alunoId)
+    .then((data) =>
+      response.status(200).json({
+        status: "success",
+        message: "Aluno removido da turma",
+        objeto: data,
+      }),
+    )
+    .catch((err) =>
+      response.status(400).json({
+        status: "error",
+        message: err,
+      }),
+    );
+};
+
+module.exports = {
+  getTurmas,
+  addTurma,
+  updateTurma,
+  deleteTurma,
+  getTurmaById,
+  matricularAluno,
+  removerAluno,
+};
