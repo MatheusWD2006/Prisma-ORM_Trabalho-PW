@@ -1,75 +1,72 @@
-# Guia completo: servidor Express com Prisma 7 e PostgreSQL
+# Guia do projeto Prisma + Express + PostgreSQL
 
-Este arquivo documenta a montagem e a execução do servidor que está na pasta
-`Trabalho Prisma_ORM/server`.
+Este arquivo explica como configurar e rodar o servidor do projeto que está em:
+`Trabalho Prisma_ORM/server`
 
 ## 1. Pré-requisitos
 
-Instalar e verificar:
+Verifique se o Node e o npm estão instalados:
 
 ```powershell
 node --version
 npm --version
 ```
 
-Também é necessário ter o PostgreSQL instalado e em execução. O banco usado
-neste projeto é:
+Também é necessário ter o PostgreSQL instalado e em execução.
+
+Banco usado no projeto:
 
 ```text
 Banco: trabalho_web
 Usuário: postgres
-Senha: postgres (ou a senha configurada localmente)
+Senha: postgres
 Host: localhost
 Porta: 5432
 ```
 
-O banco pode ser criado pelo pgAdmin ou pelo `psql`:
+Se necessário, crie o banco:
 
 ```sql
 CREATE DATABASE trabalho_web;
 ```
 
-## 2. Entrar na pasta correta
+## 2. Entrar na pasta do servidor
 
-O `package.json` fica dentro de `server`. Todos os comandos npm e Prisma devem
-ser executados nessa pasta:
+Todos os comandos do Prisma, npm e do servidor devem ser executados dentro de `server`:
 
 ```powershell
 cd "c:\Users\User\OneDrive\Documentos\FACULDADE - CIÊNCIAS DA COMPUTAÇÃO\5° QUINTO SEMESTRE CC\Programação WEB\Trabalho Prisma_ORM\server"
 ```
 
-Se o terminal estiver em `Trabalho Prisma_ORM`, usar:
+Ou, se estiver dentro da pasta do projeto:
 
 ```powershell
 cd server
 ```
 
-## 3. Criar o projeto e instalar as dependências
+## 3. Instalar dependências
 
-Somente para um projeto novo:
+Se o projeto ainda não estiver com as dependências instaladas:
 
 ```powershell
-npm init -y
 npm install express cors dotenv @prisma/client @prisma/adapter-pg pg
 npm install --save-dev prisma nodemon tsx @types/node
 ```
 
-O que cada pacote faz:
+Função dos principais pacotes:
 
-| Pacote | Função |
-| ------ | ------ |
-| `express` | Cria o servidor HTTP e as rotas |
-| `cors` | Permite requisições de outros endereços, como um frontend React |
-| `dotenv` | Carrega variáveis do arquivo `.env` |
-| `prisma` | Fornece a CLI do Prisma |
-| `@prisma/client` | Runtime do cliente Prisma |
-| `@prisma/adapter-pg` | Adapter PostgreSQL exigido pelo Prisma 7 |
-| `pg` | Driver de conexão com PostgreSQL |
-| `tsx` | Executa o cliente Prisma gerado em TypeScript |
-| `nodemon` | Reinicia o servidor ao detectar alterações |
-| `@types/node` | Fornece as tipagens do Node para o TypeScript reconhecer `process.env` |
+- `express`: servidor HTTP
+- `cors`: permite acesso de frontend
+- `dotenv`: lê variáveis do `.env`
+- `prisma`: CLI do Prisma
+- `@prisma/client`: cliente Prisma
+- `@prisma/adapter-pg`: adapter PostgreSQL exigido pelo Prisma 7
+- `pg`: driver do PostgreSQL
+- `tsx`: executa arquivos TypeScript
+- `nodemon`: reinicia o servidor automaticamente
+- `@types/node`: tipagens do Node
 
-## 4. Corrigir o erro do TypeScript/Node
+## 4. Configurar TypeScript e Node
 
 Se o VS Code mostrar erro como:
 
@@ -77,7 +74,7 @@ Se o VS Code mostrar erro como:
 Cannot find name 'process'. Do you need to install type definitions for node?
 ```
 
-É necessário instalar as tipagens do Node e configurar o TypeScript:
+instale as tipagens:
 
 ```powershell
 npm i -D @types/node
@@ -101,32 +98,20 @@ Arquivo: `server/tsconfig.json`
 }
 ```
 
-Isso resolveu o erro em `prisma.config.ts` e em outros arquivos que usam `process.env`.
+Isso resolve erros em `prisma.config.ts` e em arquivos que usam `process.env`.
 
-## 5. Inicializar o Prisma
-
-Em um projeto novo:
-
-```powershell
-npx prisma init
-```
-
-Esse comando cria, entre outros arquivos, `prisma/schema.prisma` e `.env`.
-Neste projeto já existe também o arquivo `prisma.config.ts`.
-
-## 6. Configurar o arquivo `.env`
+## 5. Configurar o arquivo .env
 
 Arquivo: `server/.env`
 
 ```env
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/trabalho_web?schema=public"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/trabalho_web?schema=public"
 PORT=3003
 ```
 
-Trocar `postgres:postgres` pelo usuário e senha reais do PostgreSQL quando
-necessário. Não publicar esse arquivo com credenciais reais.
+Se a senha do PostgreSQL for outra, trocar o valor.
 
-## 7. Configurar o Prisma
+## 6. Configurar Prisma
 
 Arquivo: `server/prisma.config.ts`
 
@@ -135,59 +120,61 @@ import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
 export default defineConfig({
-	schema: "prisma/schema.prisma",
-	migrations: {
-		path: "prisma/migrations",
-	},
-	datasource: {
-		url: process.env["DATABASE_URL"],
-	},
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+  },
+  datasource: {
+    url: process.env["DATABASE_URL"],
+  },
 });
 ```
 
-## 8. Configurar o schema
+## 7. Configurar o schema Prisma
 
 Arquivo: `server/prisma/schema.prisma`
 
 ```prisma
 generator client {
-	provider = "prisma-client"
-	output   = "../generated/prisma"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
-	provider = "postgresql"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Professor {
-	id        Int      @id @default(autoincrement())
-	nome      String
-	email     String   @unique
-	materia   String
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  materia   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-	alunos    Aluno[]
+  alunos    Aluno[]
 }
 
 model Aluno {
-	id           Int         @id @default(autoincrement())
-	nome         String
-	email        String      @unique
-	matricula    String      @unique
-	createdAt    DateTime    @default(now())
-	updatedAt    DateTime    @updatedAt
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  matricula String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-	professores  Professor[]
+  professores Professor[]
 }
 ```
 
-O `generator` faz o cliente ser criado em `server/generated/prisma`. Essa
-pasta é automática e não deve ser editada manualmente.
+Observação:
+- o Prisma 7 gera o cliente em `server/generated/prisma`
+- essa pasta é criada automaticamente e não deve ser mexida manualmente
 
-## 9. Criar as tabelas e gerar o cliente
+## 8. Criar as tabelas e gerar o cliente
 
-Executar depois de configurar o PostgreSQL e o `.env`:
+Executar:
 
 ```powershell
 npx prisma format
@@ -196,38 +183,36 @@ npx prisma migrate dev --name cria_alunos_e_professores
 npx prisma generate
 ```
 
-O comando `migrate dev` cria a migration, cria ou altera as tabelas no banco e
-atualiza a estrutura local. O `generate` cria os arquivos em
-`server/generated/prisma`.
+Explicação:
+- `migrate dev` cria a migration e aplica as tabelas no PostgreSQL
+- `generate` gera os arquivos do cliente Prisma
 
-Se a migration já existir e o banco estiver vazio, verificar primeiro o estado:
+Se o banco já estiver inicializado e você quiser só validar:
 
 ```powershell
 npx prisma migrate status
+npx prisma validate
 ```
 
-Não apagar a pasta `prisma/migrations` sem saber que o histórico do banco será
-reiniciado.
+## 9. Configurar o package.json
 
-## 10. Configurar o `package.json`
-
-Arquivo: `server/package.json`. Os scripts essenciais são:
+Arquivo: `server/package.json`
 
 ```json
 {
-	"type": "module",
-	"scripts": {
-		"start": "node server.js",
-		"start:dev": "nodemon --exec tsx server.js"
-	}
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "nodemon --exec tsx server.js"
+  }
 }
 ```
 
-O `tsx` é necessário porque o cliente gerado pelo Prisma 7 contém arquivos
-`.ts`. Executar apenas `nodemon server.js` causa o erro
-`ERR_UNKNOWN_FILE_EXTENSION: .ts`.
+Importante:
+- não usar `node server.js` sem `tsx` em projetos com Prisma 7
+- `nodemon server.js` também pode gerar erro por arquivos `.ts`
 
-## 11. Criar o servidor
+## 10. Criar o servidor
 
 Arquivo: `server/server.js`
 
@@ -241,8 +226,9 @@ import { PrismaPg } from "@prisma/adapter-pg";
 dotenv.config();
 
 const adapter = new PrismaPg({
-	connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 });
+
 const prisma = new PrismaClient({ adapter });
 
 const app = express();
@@ -252,52 +238,50 @@ app.use(express.json());
 const PORT = process.env.PORT || 3003;
 
 app.get("/", (req, res) => {
-	res.send("Servidor rodando com sucesso!");
+  res.send("Servidor rodando com sucesso!");
 });
 
 app.get("/alunos", async (req, res) => {
-	try {
-		const alunos = await prisma.aluno.findMany();
-		res.json(alunos);
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: "Erro ao buscar alunos" });
-	}
+  try {
+    const alunos = await prisma.aluno.findMany();
+    res.json(alunos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro ao buscar alunos" });
+  }
 });
 
 app.listen(PORT, () => {
-	console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
 ```
 
-Alterações importantes feitas manualmente:
+Mudanças importantes:
+1. importar `cors` antes de `app.use(cors())`
+2. importar `PrismaClient` de `./generated/prisma/client.ts`
+3. importar `PrismaPg` de `@prisma/adapter-pg`
+4. criar o adapter com `DATABASE_URL`
+5. criar o Prisma Client com `{ adapter }`
+6. carregar o `.env` antes de usar as variáveis
+7. rodar com `tsx` no modo desenvolvimento
 
-1. Importar `cors` antes de usar `app.use(cors())`.
-2. Importar `PrismaClient` de `./generated/prisma/client.ts`.
-3. Importar `PrismaPg` de `@prisma/adapter-pg`.
-4. Criar o adapter com `DATABASE_URL`.
-5. Criar o Prisma Client com `{ adapter }`.
-6. Carregar o `.env` antes de criar o adapter.
-7. Usar `tsx` no script de desenvolvimento.
-
-Não usar este código antigo:
+Não usar esse padrão antigo:
 
 ```js
 const { PrismaClient } = prismaPkg;
 ```
 
-`prismaPkg` não existe e gera erro. Também não instanciar o Prisma 7 assim:
+ou:
 
 ```js
 const prisma = new PrismaClient();
 ```
 
-Sem o adapter PostgreSQL, o Prisma 7 informa que o cliente foi criado sem as
-opções necessárias.
+Isso gera erro no Prisma 7 sem adapter PostgreSQL.
 
-## 12. Iniciar o servidor
+## 11. Iniciar o servidor
 
-Modo desenvolvimento, com reinício automático:
+Modo desenvolvimento:
 
 ```powershell
 npm run start:dev
@@ -315,76 +299,81 @@ Mensagem esperada:
 Servidor rodando na porta 3003
 ```
 
-Manter esse terminal aberto enquanto os testes são executados.
+## 12. Testar a rota principal
 
-## 13. Testar a rota principal
-
-No PowerShell, abrir outro terminal e executar:
+Abrir outro terminal e executar:
 
 ```powershell
 Invoke-WebRequest -UseBasicParsing http://localhost:3003/
 ```
 
-Resposta esperada no conteúdo:
+Resposta esperada:
 
 ```text
 Servidor rodando com sucesso!
 ```
 
-Também é possível abrir no navegador:
+Também pode abrir no navegador:
 
 ```text
 http://localhost:3003/
 ```
 
-## 14. Testar a consulta de alunos
+## 13. Testar a rota /alunos
 
 ```powershell
 Invoke-WebRequest -UseBasicParsing http://localhost:3003/alunos
 ```
 
-Se o banco estiver conectado e não houver alunos, a resposta esperada é:
+Se o banco estiver conectado e não houver registros, a resposta será:
 
 ```json
 []
 ```
 
-Para inserir um registro de teste, usar o Prisma Studio:
+Para inserir dados de teste, usar o Prisma Studio:
 
 ```powershell
 npx prisma studio
 ```
 
-Abrir `http://localhost:5555`, inserir um aluno e consultar novamente
-`http://localhost:3003/alunos`.
+Abrir:
 
-Também é possível consultar pelo `psql`:
-
-```sql
-SELECT * FROM "Aluno";
+```text
+http://localhost:5555
 ```
 
-## 15. Diagnóstico de erros comuns
+e criar um aluno. Depois testar novamente:
+
+```powershell
+Invoke-WebRequest -UseBasicParsing http://localhost:3003/alunos
+```
+
+## 14. Diagnóstico de erros comuns
 
 ### `ENOENT package.json`
 
-O comando foi executado na pasta errada. Entrar em `server` antes de usar npm.
+Você executou o comando na pasta errada. Entre em `server` antes do `npm`.
 
 ### `ERR_UNKNOWN_FILE_EXTENSION: .ts`
 
-O servidor foi iniciado com `node server.js` ou com `nodemon server.js` sem o
-`tsx`. Usar:
+Foi executado com `node server.js` ou `nodemon server.js` sem `tsx`.
+
+Use:
+
+```powershell
+npm run start:dev
+```
 
 ### `Cannot find name 'process'`
 
-O erro do editor aconteceu porque o TypeScript não tinha as tipagens do Node.
-Instalar:
+Falta instalar as tipagens do Node:
 
 ```powershell
 npm i -D @types/node
 ```
 
-e garantir que exista `tsconfig.json` com:
+e ter `tsconfig.json` com:
 
 ```json
 {
@@ -394,40 +383,43 @@ e garantir que exista `tsconfig.json` com:
 }
 ```
 
-Depois disso, o arquivo `prisma.config.ts` volta a ficar sem erro.
-
-```powershell
-npm run start:dev
-```
-
 ### `A driver adapter is required`
 
-Faltou instalar ou configurar o adapter do PostgreSQL:
+Faltou instalar ou configurar o adapter PostgreSQL:
 
 ```powershell
 npm install @prisma/adapter-pg pg
 ```
 
-Depois conferir se `server.js` cria `new PrismaPg(...)` e passa `{ adapter }`
-para `new PrismaClient(...)`.
+Verificar se o `server.js` contém:
+
+```js
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
+const prisma = new PrismaClient({ adapter });
+```
 
 ### Erro de conexão com PostgreSQL
 
-Verificar se o serviço do PostgreSQL está ligado, se o banco existe e se a
-`DATABASE_URL` possui usuário, senha, porta e nome de banco corretos.
+Verificar:
+- serviço do PostgreSQL está ativo
+- banco `trabalho_web` existe
+- DATABASE_URL está correta
+- usuário e senha estão certos
 
-### `Erro ao buscar alunos` na rota `/alunos`
+### `Erro ao buscar alunos` na rota /alunos
 
-Conferir o terminal do servidor e executar:
+Executar:
 
 ```powershell
 npx prisma migrate status
 npx prisma validate
 ```
 
-As tabelas precisam existir no banco antes da consulta.
+Se a tabela não existir, o Prisma ainda não criou as estruturas no banco.
 
-## 16. Ordem resumida para executar novamente
+## 15. Ordem resumida para rodar novamente
 
 ```powershell
 cd "c:\Users\User\OneDrive\Documentos\FACULDADE - CIÊNCIAS DA COMPUTAÇÃO\5° QUINTO SEMESTRE CC\Programação WEB\Trabalho Prisma_ORM\server"
@@ -444,3 +436,27 @@ cd "c:\Users\User\OneDrive\Documentos\FACULDADE - CIÊNCIAS DA COMPUTAÇÃO\5° 
 Invoke-WebRequest -UseBasicParsing http://localhost:3003/
 Invoke-WebRequest -UseBasicParsing http://localhost:3003/alunos
 ```
+
+## 16. Resumo final
+
+O projeto atual usa:
+- Express para API
+- PostgreSQL como banco
+- Prisma 7 com adapter PostgreSQL
+- arquivo `.env` com `DATABASE_URL`
+- `tsx` para executar arquivos TypeScript gerados
+- `nodemon` para reiniciar automaticamente
+
+Se tudo estiver correto, o servidor deve responder em:
+
+```text
+http://localhost:3003/
+```
+
+e a rota:
+
+```text
+http://localhost:3003/alunos
+```
+
+deve retornar uma lista JSON, normalmente `[]` quando ainda não houve registros.
