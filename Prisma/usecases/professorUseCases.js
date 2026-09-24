@@ -22,4 +22,36 @@ const addProfessorDB = async (body) => {
   }
 };
 
-module.exports = { getProfessoresDB, addProfessorDB };
+const updateProfessorDB = async (id, body) => {
+  try {
+    const { nome, email } = body;
+    return await prisma.professor.update({
+      where: { id },
+      data: { nome, email },
+    });
+  } catch (err) {
+    throw "Erro ao atualizar professor: " + err;
+  }
+};
+
+const deleteProfessorDB = async (id) => {
+  try {
+    return await prisma.professor.delete({
+      where: { id },
+    });
+  } catch (err) {
+    throw "Erro ao excluir professor: " + err;
+  }
+};
+
+const getProfessorByIdDB = async (id) => {
+  try {
+    return await prisma.professor.findUnique({
+      where: { id },
+    });
+  } catch (err) {
+    throw "Erro ao buscar professor: " + err;
+  }
+};
+
+module.exports = { getProfessoresDB, addProfessorDB, updateProfessorDB, deleteProfessorDB, getProfessorByIdDB };

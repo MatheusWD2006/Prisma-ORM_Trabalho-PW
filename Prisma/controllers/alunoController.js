@@ -1,26 +1,26 @@
 const { request, response } = require("express");
 const {
-  getProfessoresDB,
-  addProfessorDB,
-  updateProfessorDB,
-  deleteProfessorDB,
-  getProfessorByIdDB,
-} = require("../usecases/professorUseCases");
+  getAlunosDB,
+  addAlunoDB,
+  updateAlunoDB,
+  deleteAlunoDB,
+  getAlunoByIdDB,
+} = require("../usecases/alunoUseCases");
 
-const getProfessores = async (request, response) => {
-  await getProfessoresDB()
+const getAlunos = async (request, response) => {
+  await getAlunosDB()
     .then((data) => response.status(200).json(data))
     .catch((err) =>
       response.status(400).json({ status: "error", message: err }),
     );
 };
 
-const addProfessor = async (request, response) => {
-  await addProfessorDB(request.body)
+const addAluno = async (request, response) => {
+  await addAlunoDB(request.body)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor criado",
+        message: "Aluno criado",
         objeto: data,
       }),
     )
@@ -29,13 +29,13 @@ const addProfessor = async (request, response) => {
     );
 };
 
-const updateProfessor = async (request, response) => {
+const updateAluno = async (request, response) => {
   const { id } = request.params;
-  await updateProfessorDB(id, request.body)
+  await updateAlunoDB(id, request.body)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor atualizado",
+        message: "Aluno atualizado",
         objeto: data,
       }),
     )
@@ -44,13 +44,13 @@ const updateProfessor = async (request, response) => {
     );
 };
 
-const deleteProfessor = async (request, response) => {
+const deleteAluno = async (request, response) => {
   const { id } = request.params;
-  await deleteProfessorDB(id)
+  await deleteAlunoDB(id)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor excluído",
+        message: "Aluno excluído",
         objeto: data,
       }),
     )
@@ -59,13 +59,13 @@ const deleteProfessor = async (request, response) => {
     );
 };
 
-const getProfessorById = async (request, response) => {
+const getAlunoById = async (request, response) => {
   const { id } = request.params;
-  await getProfessorByIdDB(id)
+  await getAlunoByIdDB(id)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor encontrado",
+        message: "Aluno encontrado",
         objeto: data,
       }),
     )
@@ -74,4 +74,4 @@ const getProfessorById = async (request, response) => {
     );
 };
 
-module.exports = { getProfessores, addProfessor, updateProfessor, deleteProfessor, getProfessorById };
+module.exports = { getAlunos, addAluno, updateAluno, deleteAluno, getAlunoById };

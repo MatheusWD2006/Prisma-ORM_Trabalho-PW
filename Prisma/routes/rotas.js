@@ -1,8 +1,9 @@
-const { Router } = require("express");
-const { rotasProfessores } = require("./rotasProfessores");
+const { Router } = require('express');
+const todasAsRotas = require('./indexRoutes');
 
 const rotas = new Router();
 
-rotas.use(rotasProfessores);
+
+todasAsRotas.forEach(rota => rotas.use(rota));
 
 module.exports = rotas;

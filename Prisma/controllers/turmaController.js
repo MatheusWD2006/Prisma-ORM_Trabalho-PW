@@ -1,26 +1,26 @@
 const { request, response } = require("express");
 const {
-  getProfessoresDB,
-  addProfessorDB,
-  updateProfessorDB,
-  deleteProfessorDB,
-  getProfessorByIdDB,
-} = require("../usecases/professorUseCases");
+  getTurmasDB,
+  addTurmaDB,
+  updateTurmaDB,
+  deleteTurmaDB,
+  getTurmaByIdDB,
+} = require("../usecases/turmaUseCases");
 
-const getProfessores = async (request, response) => {
-  await getProfessoresDB()
+const getTurmas = async (request, response) => {
+  await getTurmasDB()
     .then((data) => response.status(200).json(data))
     .catch((err) =>
       response.status(400).json({ status: "error", message: err }),
     );
 };
 
-const addProfessor = async (request, response) => {
-  await addProfessorDB(request.body)
+const addTurma = async (request, response) => {
+  await addTurmaDB(request.body)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor criado",
+        message: "Turma criada",
         objeto: data,
       }),
     )
@@ -29,13 +29,13 @@ const addProfessor = async (request, response) => {
     );
 };
 
-const updateProfessor = async (request, response) => {
+const updateTurma = async (request, response) => {
   const { id } = request.params;
-  await updateProfessorDB(id, request.body)
+  await updateTurmaDB(id, request.body)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor atualizado",
+        message: "Turma atualizada",
         objeto: data,
       }),
     )
@@ -44,13 +44,13 @@ const updateProfessor = async (request, response) => {
     );
 };
 
-const deleteProfessor = async (request, response) => {
+const deleteTurma = async (request, response) => {
   const { id } = request.params;
-  await deleteProfessorDB(id)
+  await deleteTurmaDB(id)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor excluído",
+        message: "Turma excluída",
         objeto: data,
       }),
     )
@@ -59,13 +59,13 @@ const deleteProfessor = async (request, response) => {
     );
 };
 
-const getProfessorById = async (request, response) => {
+const getTurmaById = async (request, response) => {
   const { id } = request.params;
-  await getProfessorByIdDB(id)
+  await getTurmaByIdDB(id)
     .then((data) =>
       response.status(200).json({
         status: "success",
-        message: "Professor encontrado",
+        message: "Turma encontrada",
         objeto: data,
       }),
     )
@@ -74,4 +74,4 @@ const getProfessorById = async (request, response) => {
     );
 };
 
-module.exports = { getProfessores, addProfessor, updateProfessor, deleteProfessor, getProfessorById };
+module.exports = { getTurmas, addTurma, updateTurma, deleteTurma, getTurmaById };
