@@ -1,3 +1,15 @@
+# Prisma ORM 6.7.0
+
+### Disciplina: Programação Web
+
+### Trabalho de Pesquisa
+
+### Alunos:
+- Matheus Witte Ditz
+- Gabriel Rizzatto
+
+---
+
 ## 1. Inicialização e Instalação de Dependências
 
 **Inicie o projeto Node.js:** 
