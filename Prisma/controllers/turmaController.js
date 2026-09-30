@@ -1,4 +1,3 @@
-const { request, response } = require("express");
 const {
   getTurmasDB,
   addTurmaDB,
@@ -13,7 +12,10 @@ const getTurmas = async (request, response) => {
   await getTurmasDB()
     .then((data) => response.status(200).json(data))
     .catch((err) =>
-      response.status(400).json({ status: "error", message: err }),
+      response.status(400).json({ 
+        status: "error", 
+        message: err.message || err 
+      }),
     );
 };
 
@@ -27,7 +29,10 @@ const addTurma = async (request, response) => {
       }),
     )
     .catch((err) =>
-      response.status(400).json({ status: "error", message: err }),
+      response.status(400).json({ 
+        status: "error", 
+        message: err.message || err 
+      }),
     );
 };
 
@@ -42,7 +47,10 @@ const updateTurma = async (request, response) => {
       }),
     )
     .catch((err) =>
-      response.status(400).json({ status: "error", message: err }),
+      response.status(400).json({ 
+        status: "error", 
+        message: err.message || err 
+      }),
     );
 };
 
@@ -57,7 +65,10 @@ const deleteTurma = async (request, response) => {
       }),
     )
     .catch((err) =>
-      response.status(400).json({ status: "error", message: err }),
+      response.status(400).json({ 
+        status: "error", 
+        message: err.message || err 
+      }),
     );
 };
 
@@ -72,13 +83,23 @@ const getTurmaById = async (request, response) => {
       }),
     )
     .catch((err) =>
-      response.status(400).json({ status: "error", message: err }),
+      response.status(400).json({ 
+        status: "error", 
+        message: err.message || err 
+      }),
     );
 };
 
 const matricularAluno = async (request, response) => {
   const turmaId = Number(request.params.id);
-  const { alunoId } = request.body; // Recebe o ID do aluno do Postman
+  const { alunoId } = request.body;
+
+  if (!alunoId) {
+    return response.status(400).json({
+      status: "error",
+      message: "O campo alunoId é obrigatório no corpo da requisição.",
+    });
+  }
 
   await matricularAlunoDB(turmaId, alunoId)
     .then((data) =>
@@ -91,7 +112,7 @@ const matricularAluno = async (request, response) => {
     .catch((err) =>
       response.status(400).json({
         status: "error",
-        message: err,
+        message: err.message || err,
       }),
     );
 };
@@ -99,6 +120,13 @@ const matricularAluno = async (request, response) => {
 const removerAluno = async (request, response) => {
   const turmaId = Number(request.params.id);
   const { alunoId } = request.body;
+
+  if (!alunoId) {
+    return response.status(400).json({
+      status: "error",
+      message: "O campo alunoId é obrigatório no corpo da requisição.",
+    });
+  }
 
   await removerAlunoDB(turmaId, alunoId)
     .then((data) =>
@@ -111,7 +139,7 @@ const removerAluno = async (request, response) => {
     .catch((err) =>
       response.status(400).json({
         status: "error",
-        message: err,
+        message: err.message || err,
       }),
     );
 };

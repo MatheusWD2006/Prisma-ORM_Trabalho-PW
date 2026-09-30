@@ -1,12 +1,14 @@
-const { PrismaClient } = require("../generated/prisma/index.js");
+const { PrismaClient, Prisma } = require("../generated/prisma/index.js");
 const prisma = new PrismaClient();
 
 const getTurmasDB = async () => {
   try {
     return await prisma.turma.findMany({
       orderBy: { nome: "asc" },
-      include: { professor: true },
-      include: { alunos: true },
+      include: {
+        professor: true,
+        alunos: true,
+      },
     });
   } catch (err) {
     throw "Erro ao listar turmas: " + err;
@@ -22,10 +24,12 @@ const addTurmaDB = async (body) => {
         nome,
         professorId: Number(professorId),
       },
-      include: { professor: true },
+      include: {
+        professor: true,
+        alunos: true,
+      },
     });
   } catch (err) {
-    // P2003 indica que a chave estrangeira (professorId) não existe no banco
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&
       err.code === "P2003"
@@ -35,14 +39,19 @@ const addTurmaDB = async (body) => {
     throw new Error("Erro ao inserir turma: " + err.message);
   }
 };
+
 const matricularAlunoDB = async (turmaId, alunoId) => {
   try {
     return await prisma.turma.update({
       where: { id: Number(turmaId) },
       data: {
         alunos: {
-          connect: { id: Number(alunoId) }, // Liga o aluno existente a esta turma
+          connect: { id: Number(alunoId) },
         },
+      },
+      include: {
+        professor: true,
+        alunos: true,
       },
     });
   } catch (err) {
@@ -56,8 +65,12 @@ const removerAlunoDB = async (turmaId, alunoId) => {
       where: { id: Number(turmaId) },
       data: {
         alunos: {
-          disconnect: { id: Number(alunoId) }, // Remove a ligação entre eles
+          disconnect: { id: Number(alunoId) },
         },
+      },
+      include: {
+        professor: true,
+        alunos: true,
       },
     });
   } catch (err) {
@@ -67,23 +80,37 @@ const removerAlunoDB = async (turmaId, alunoId) => {
 
 const updateTurmaDB = async (id, body) => {
   try {
-    const { nome, professorId } = body;
+    const { nome, professorId, alunosIds } = body;
 
-    // Monta o objeto de atualização com base nos campos enviados
     const dataToUpdate = {};
-    if (nome) dataToUpdate.nome = nome;
-    if (professorId) dataToUpdate.professorId = Number(professorId);
+
+    if (nome) {
+      dataToUpdate.nome = nome;
+    }
+    
+    if (professorId) {
+      dataToUpdate.professorId = Number(professorId);
+    }
+
+  
+    if (alunosIds && Array.isArray(alunosIds)) {
+      dataToUpdate.alunos = {
+        set: alunosIds.map((alunoId) => ({ id: Number(alunoId) })),
+      };
+    }
 
     return await prisma.turma.update({
       where: { id: Number(id) },
       data: dataToUpdate,
-      include: { professor: true },
+      include: {
+        professor: true,
+        alunos: true, 
+      },
     });
   } catch (err) {
     throw "Erro ao atualizar turma: " + err;
   }
 };
-
 const deleteTurmaDB = async (id) => {
   try {
     return await prisma.turma.delete({
@@ -98,8 +125,10 @@ const getTurmaByIdDB = async (id) => {
   try {
     return await prisma.turma.findUnique({
       where: { id: Number(id) },
-      include: { professor: true },
-      include: { alunos: true },
+      include: {
+        professor: true,
+        alunos: true,
+      },
     });
   } catch (err) {
     throw "Erro ao buscar turma: " + err;

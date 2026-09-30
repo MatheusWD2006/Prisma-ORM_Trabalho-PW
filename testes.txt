@@ -1,0 +1,103 @@
+==================================================
+1. PROFESSOR
+==================================================
+
+--- [POST /professores] Exemplo 1 ---
+{
+  "nome": "Girafales",
+  "email": "girafales@escola.com"
+}
+
+--- [POST /professores] Exemplo 2 ---
+{
+  "nome": "Breno",
+  "email": "breno@br.edu"
+}
+
+
+--- [PUT /professores/1] Exemplo 1 ---
+{
+  "nome": "Professor Girafales",
+  "email": "girafales.novo@escola.com"
+}
+
+--- [PUT /professores/2] Exemplo 2 ---
+{
+  "nome": "Breno B",
+  "email": "Breno@br.edu"
+}
+
+
+==================================================
+2. ALUNO
+==================================================
+
+--- [POST /alunos] Exemplo 1 ---
+{
+  "nome": "Bruno",
+  "matricula": "2026001"
+}
+
+--- [POST /alunos] Exemplo 2 ---
+{
+  "nome": "Maria",
+  "matricula": "2026002"
+}
+
+
+--- [PUT /alunos/1] Exemplo 1 ---
+{
+  "nome": "Bruno B",
+  "matricula": "2026001-A"
+}
+
+--- [PUT /alunos/2] Exemplo 2 ---
+{
+  "nome": "Maria m",
+  "matricula": "2026002-A"
+}
+
+
+==================================================
+3. TURMA
+==================================================
+
+--- [POST /turmas] Exemplo 1 ---
+{
+  "nome": "Matemática",
+  "professorId": 1
+}
+
+--- [POST /turmas] Exemplo 2 ---
+{
+  "nome": "Química",
+  "professorId": 2
+}
+
+
+--- [PUT /turmas/1] Exemplo 1 ---
+{
+  "nome": "Aritmética",
+  "professorId": 1
+}
+
+--- [PUT /turmas/1] Exemplo 2 (Troca de professor) ---
+{
+  "nome": "Aritmética",
+  "professorId": 2
+}
+
+==================================================
+4. MATRÍCULA E REMOÇÃO DE ALUNOS
+==================================================
+
+--- [POST /turmas/1/matricular] Matricular o aluno ID 1 na turma ID 1 ---
+{
+  "alunoId": 1
+}
+
+
+--- [POST /turmas/1/remover-aluno] Remover o aluno ID 1 da turma ID 1 ---
+{
+  "alunoId": 1
+}

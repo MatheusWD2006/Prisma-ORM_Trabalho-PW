@@ -62,6 +62,63 @@ DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco?schema=pub
 **Escreva os seus Models:** 
 No ficheiro `prisma/schema.prisma`, certifique-se de que o provider é `"postgresql"` e defina as suas tabelas (ex: `model Professor`, `model Aluno`, `model Turma`).
 
+**Exemplo de schema.prisma**
+```prisma
+// Configura o cliente Prisma gerado a partir deste schema.
+generator client {
+  // Define a biblioteca do cliente que o Prisma vai gerar.
+  provider = "prisma-client-js"
+  // Define o diretório de destino dos arquivos gerados.
+  output   = "../generated/prisma"
+}
+
+// Configura a conexão com a base de dados.
+datasource db {
+  // Indica que a base de dados utilizada é PostgreSQL.
+  provider = "postgresql"
+  // Lê a URL de conexão da variável de ambiente DATABASE_URL.
+  url      = env("DATABASE_URL")
+}
+
+// Define o model Professor, correspondente a uma tabela.
+model Professor {
+  // Chave primária inteira, gerada automaticamente em sequência.
+  id     Int     @id @default(autoincrement())
+  // Campo de texto para o nome do professor.
+  nome   String
+  // Campo de texto com valor único, sem duplicatas.
+  email  String  @unique
+  // Relação de um professor com várias turmas.
+  turmas Turma[]
+}
+
+// Define o model Aluno, correspondente a uma tabela.
+model Aluno {
+  // Chave primária inteira, gerada automaticamente em sequência.
+  id        Int     @id @default(autoincrement())
+  // Campo de texto para o nome do aluno.
+  nome      String
+  // Matrícula única para cada aluno.
+  matricula String  @unique
+  // Relação de um aluno com várias turmas.
+  turmas    Turma[]
+}
+
+// Define o model Turma, correspondente a uma tabela.
+model Turma {
+  // Chave primária inteira, gerada automaticamente em sequência.
+  id          Int       @id @default(autoincrement())
+  // Campo de texto para o nome da turma.
+  nome        String
+  // Campo inteiro que armazena a chave estrangeira do professor.
+  professorId Int
+  // Relação com Professor: professorId referencia o campo id.
+  professor   Professor @relation(fields: [professorId], references: [id])
+  // Relação de uma turma com vários alunos.
+  alunos      Aluno[]
+}
+```
+
 ## 3. Explicação dos Arquivos Criados
 
 * **`.env`**: Arquivo gerado na raiz do projeto destinado a armazenar credenciais e variáveis de ambiente confidenciais. É aqui que a `DATABASE_URL` (string de conexão com o PostgreSQL) fica guardada. Este arquivo nunca deve ser enviado para o GitHub.
