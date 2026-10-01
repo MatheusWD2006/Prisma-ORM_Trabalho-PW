@@ -78,13 +78,13 @@
 --- [PUT /turmas/1] Exemplo 1 ---
 {
   "nome": "Aritmética",
-  "professorId": 1
+  "professorId": 2
 }
 
---- [PUT /turmas/1] Exemplo 2 (Troca de professor) ---
+--- [PUT /turmas/2] Exemplo 2 (Troca de professor) ---
 {
-  "nome": "Aritmética",
-  "professorId": 2
+  "nome": "Quimica orgânica",
+  "professorId": 1
 }
 
 ==================================================
@@ -100,4 +100,21 @@
 --- [POST /turmas/1/remover-aluno] Remover o aluno ID 1 da turma ID 1 ---
 {
   "alunoId": 1
+}
+
+--- [PUT /turmas/2] Atualizar nome, professor e definir lista de alunos ---
+{
+  "nome": "Estrutura de Dados I",
+  "professorId": 2,
+  "alunoId": 1
+}
+
+--- [PUT /turmas/3] Atualizar apenas a lista de alunos da turma ---
+{
+  "alunosIds": [1, 2]
+}
+
+--- [PUT /turmas/1] Limpar/Remover todos os alunos da turma ---
+{
+  "alunosIds": []
 }
